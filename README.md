@@ -35,7 +35,7 @@
 
 - **Handler Function**
 
--- **KEYSYM vs KEYCODE**
+- **KEYSYM vs KEYCODE**
 
 - **Hooks**:
 
