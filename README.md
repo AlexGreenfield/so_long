@@ -142,35 +142,37 @@ Es el encargado de mantener nuestro proceso en abierto. Sin el, la ventana autom
 
 ### Gestión de gráficos
 
+Antes que nada, por el amor de dios, créate una estructura que contenga todos los punteros de tu entorno mlx. Es decir, el puntero principal del init y tu ventana.
+
+```c
+typedef struct s_mlx_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}	t_mlx_data;
+```
+
 #### Mostrar imagen en ventana
 
 1. Primero, inicia la estructura con mlx_init
 
 ```c
-	void	*mlx;
-
-	mlx = mlx_init();
+	mlx.mlx_ptr = mlx_init();
 ```
 
 2. Abre una ventana con mlx_new_window
 
 ```c
-	void	*mlx;
-	void	*mlx_win;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx.mlx_ptr = mlx_init();
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 1080, "Hello world!");
 ```
 
 3. Mantenla viva con mlx_loop
 
 ```c
-	void	*mlx;
-	void	*mlx_win;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	mlx_loop(mlx);
+	mlx.mlx_ptr = mlx_init();
+	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 1080, "Hello world!");
+	mlx_loop(mlx.mlx_ptr);
 ```
 
 #### Cierre con ESC y cruz
@@ -203,13 +205,13 @@ Necesitamos cerrar la ventana de dos maneras, con nuestro teclado y con nuestro 
 ```c
 	mlx_hook(mlx.win_ptr, DestroyNotify, 0, close_window, &mlx);
 
-int	close_window(t_mlx_data *mlx)
-{
-	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-	mlx_destroy_display(mlx->mlx_ptr);
-	free(mlx->mlx_ptr);
-	exit(1);
-}
+	int	close_window(t_mlx_data *mlx)
+	{
+		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_display(mlx->mlx_ptr);
+		free(mlx->mlx_ptr);
+		exit(1);
+	}
 ```
 ## Dudas y preguntas
 
