@@ -5,8 +5,10 @@
 - [Nuevos conceptos]
 - [Librería Minilibx](#libería-minilibx)
 	- [Qué es y cómo instalarla](#qué-es-y-cómo-instalarla)
-	- [Funciones y usos]
-		- [Funcion x]
+	- [Funciones y usos](#funciones-y-usos)
+		- [mlx_init](#mlx_init)
+		- [mlx_new_window](#mlx_win)
+		- [mlx_loop](#mlx_loop)
 - [Libería Math]
 - [Desarrollo]
 	- [Gestión del mapa .ber y parseo]
@@ -16,8 +18,8 @@
 		- [Parseo de rutas con Flood Fill]
 	- [Gestion de gráficos]
 		- [Mostar imagen en ventana]
-		- [Resize de la ventana]
 		- [Cierre con ESC y cruz roja]
+		- [Resize de la ventana]
 		- [Uso de images de la miniLibx]
 	- [Juego]
 		- [Hacer loop de refresco de cada movimiento o 30 fps]
@@ -45,7 +47,7 @@
 
 Una de los puntos clave de este círculo es aprender a usar librerías externas. En este ocasión vamos a manejarnos con la [MinilibX](https://github.com/42Paris/minilibx-linux), una versión minimalista del sistema de ventanas [X](https://en.wikipedia.org/wiki/X_Window_System) de Linux.
 
-Esta librería es la que nos va a permitir crear nuevas ventanas en nuestro escritorio, dibujar en ellas nuestros pixeles y manejar el input del usuario. Pero para ello, primero debemos incluirla en nuestro proyecto. Aunque puede parecer lioso, en realidad es muy fácil.
+Esta librería es la que nos va a permitir crear nuevas2 ventanas en nuestro escritorio, dibujar en ellas nuestros pixeles y manejar el input del usuario. Pero para ello, primero debemos incluirla en nuestro proyecto. Aunque puede parecer lioso, en realidad es muy fácil.
 
 1. Lo primero de todo, aunque nosotros vamos a usar la minilibx, esta depende a su vez del sistema de ventanas X original. En concreto depende de `xorg`, `x11` y `zlib`, por lo que tenemos que instalar `xorg`, `libxext-dev` y `zlib1g-dev`.
 
@@ -97,6 +99,118 @@ $(NAME): $(OBJ)
 	cc $(OBJ) -o $(NAME) -L minilibx-linux/ -lmlx -lXext -lX11
 ```
 
+### Funciones y usos
+
+#### mlx_init
+
+Inicia la estructura que va a alojar el resto de información sobre nuestro sistema de ventanas. Es el puntero principal que dicta el resto de elementos de nuestro sistema, como las diferentes ventanas que vamos a usar.
+
+```c
+	void	*mlx;
+
+	mlx = mlx_init();
+```
+
+#### mlx_win
+
+Dentro de nuestra estructura mlx, crea una nueva ventana. Recibe como parametros el puntero de nuestra estructura mlx, el tamaño de la ventana y su nombre.
+
+```c
+	void	*mlx;
+	void	*mlx_win;
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+```
+
+### mlx_loop
+
+Es el encargado de mantener nuestro proceso en abierto. Sin el, la ventana automáticamente se cerraría y se acabaría el proceso, como en un código normal.
+
+
+```c
+	void	*mlx;
+	void	*mlx_win;
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx_loop(mlx);
+```
+
+
+## Desarrollo
+
+### Gestión de gráficos
+
+#### Mostrar imagen en ventana
+
+1. Primero, inicia la estructura con mlx_init
+
+```c
+	void	*mlx;
+
+	mlx = mlx_init();
+```
+
+2. Abre una ventana con mlx_new_window
+
+```c
+	void	*mlx;
+	void	*mlx_win;
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+```
+
+3. Mantenla viva con mlx_loop
+
+```c
+	void	*mlx;
+	void	*mlx_win;
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx_loop(mlx);
+```
+
+#### Cierre con ESC y cruz
+
+Necesitamos cerrar la ventana de dos maneras, con nuestro teclado y con nuestro ratón.
+
+* Teclado: necesitamos crear un hook de teclado con mlx_key_hook. Este hook va a coger todos nuestros inputs, por lo que solo necesitamos una función que libere toda la memoria si se pulsa la tecla escape (recuerda, usa keysym en lugar de keycodes, los primeros son universales y el segundo depende del OS del usuario).
+
+```c
+	mlx_key_hook(mlx.win_ptr, handle_input, &mlx);
+
+
+	int	handle_input(int keysym, t_mlx_data *mlx)
+	{
+		static int	i;
+
+		if (keysym == XK_Escape)
+		{
+			mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+			mlx_destroy_display(mlx->mlx_ptr);
+			free(mlx->mlx_ptr);
+			exit(1);
+		}
+		return (0);
+	}
+```
+
+* Ratón: Necesitamos un hook que esté atento a cuando se pulsa la x. Para ello usamos el evento DestroyNotify (si no tienes macro, es la flag 17).
+
+```c
+	mlx_hook(mlx.win_ptr, DestroyNotify, 0, close_window, &mlx);
+
+int	close_window(t_mlx_data *mlx)
+{
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	mlx_destroy_display(mlx->mlx_ptr);
+	free(mlx->mlx_ptr);
+	exit(1);
+}
+```
 ## Dudas y preguntas
 
 - ¿Hay que crear un buffer que muestre toda la imagen de una vez, en lugar de generarla línea a línea?

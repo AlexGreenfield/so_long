@@ -36,7 +36,8 @@ int	main(int argc, char **argv)
 		mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr, 250 + i, 250, 0x00ff00);
 	mlx_key_hook(mlx.win_ptr, handle_input, &mlx);
 	mlx_hook(mlx.win_ptr, ButtonPress, ButtonPressMask, &button_press, &mlx);
-	mlx_hook(mlx.win_ptr, 17, DestroyNotify, close_window, &mlx);
+	//mlx_hook(mlx.win_ptr, 17, DestroyNotify, close_window, &mlx);
+	mlx_hook(mlx.win_ptr, DestroyNotify, 0, close_window, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	mlx_destroy_window(mlx.mlx_ptr, mlx.win_ptr);
 	mlx_destroy_display(mlx.mlx_ptr);
