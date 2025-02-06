@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:42:07 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/06 19:14:52 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:55:20 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include "minilibx-linux/mlx_int.h"
 
 // X11 libraries
-#include <X11/keysym.h>
+# include <X11/keysym.h>
+
+// System libraries
+# include <stdio.h>
 
 // Macros
 # define MALLOC_ERROR -1

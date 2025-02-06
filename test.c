@@ -12,6 +12,10 @@
 
 #include "so_long.h"
 
+int	button_press(int button, int x, int y, t_mlx_data *mlx);
+int	handle_input(int keysym, t_mlx_data *mlx);
+int close_window(t_mlx_data *mlx);
+
 int	main(int argc, char **argv)
 {
 	t_mlx_data	mlx;
@@ -30,9 +34,45 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (i++ < 100)
 		mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr, 250 + i, 250, 0x00ff00);
+	mlx_key_hook(mlx.win_ptr, handle_input, &mlx);
+	mlx_hook(mlx.win_ptr, ButtonPress, ButtonPressMask, &button_press, &mlx);
+	mlx_hook(mlx.win_ptr, 17, DestroyNotify, close_window, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	mlx_destroy_window(mlx.mlx_ptr, mlx.win_ptr);
 	mlx_destroy_display(mlx.mlx_ptr);
 	free(mlx.mlx_ptr);
 	return (0);
+}
+
+int	handle_input(int keysym, t_mlx_data *mlx)
+{
+	static int	i;
+
+	if (keysym == XK_Escape)
+	{
+		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_display(mlx->mlx_ptr);
+		free(mlx->mlx_ptr);
+		exit(1);
+	}
+	else
+		printf("Move is :%d\n", ++i);
+	return (0);
+}
+
+int	button_press(int button, int x, int y, t_mlx_data *mlx)
+{
+	if (button == 1)
+		printf("Left mouse button pressed at (%d, %d)!\n", x, y);
+	if (button == 3)
+		printf("Right mouse button pressed at (%d, %d)!\n", x, y);
+	return (0);
+}
+
+int	close_window(t_mlx_data *mlx)
+{
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	mlx_destroy_display(mlx->mlx_ptr);
+	free(mlx->mlx_ptr);
+	exit(1);
 }
