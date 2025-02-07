@@ -14,9 +14,9 @@
 
 int	button_press(int button, int x, int y, t_mlx_data *mlx);
 int	handle_input(int keysym, t_mlx_data *mlx);
-int close_window(t_mlx_data *mlx);
+int	close_window(t_mlx_data *mlx);
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	t_mlx_data	mlx;
 	int			i;
@@ -36,7 +36,6 @@ int	main(int argc, char **argv)
 		mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr, 250 + i, 250, 0x00ff00);
 	mlx_key_hook(mlx.win_ptr, handle_input, &mlx);
 	mlx_hook(mlx.win_ptr, ButtonPress, ButtonPressMask, &button_press, &mlx);
-	//mlx_hook(mlx.win_ptr, 17, DestroyNotify, close_window, &mlx);
 	mlx_hook(mlx.win_ptr, DestroyNotify, 0, close_window, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	mlx_destroy_window(mlx.mlx_ptr, mlx.win_ptr);
@@ -63,6 +62,9 @@ int	handle_input(int keysym, t_mlx_data *mlx)
 
 int	button_press(int button, int x, int y, t_mlx_data *mlx)
 {
+	void *win_copy;
+
+	win_copy = mlx->win_ptr;
 	if (button == 1)
 		printf("Left mouse button pressed at (%d, %d)!\n", x, y);
 	if (button == 3)
