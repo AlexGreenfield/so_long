@@ -1,49 +1,44 @@
 NAME = so_long
 
+# Libft
 LIBFT = libft.a
+LIBFT_DIR = libft/
 
-LIBFTDIR = ./libft
-
+# MLX
 MLX = libmlx.a
-
 MLX_DIR = minilibx-linux/
 
-SRCS = test.c \
-
+# Sources and objects
+SRCS = so_long.c
 OBJS = $(SRCS:%.c=%.o)
 
+# Compilation
+CC = cc
 CFLAGS = -Werror -Wextra -Wall
 
-CC = cc
-
+# Rules
 all: $(NAME)
 
-$(NAME): $(OBJ) $(MLX_DIR)/$(MLX) $(MLX_DIR)/$(MLX)
-	cc $(OBJS) -o $(NAME) -L minilibx-linux/ -lmlx -lXext -lX11
-
-$(MLX_DIR)/Makefile:
-	git submodule update --init --recursive
-
-$(LIBFT_DIR)/Makefile:
-	git submodule update --init --recursive
-
-modules: $(LIBFT_DIR)/Makefile $(MLX_DIR)/Makefile
-	git submodule update --init --recursive
+$(NAME): $(OBJS) $(MLX_DIR)/$(MLX) $(LIBFT_DIR)/$(LIBFT)
+	cc $(OBJS) -o $(NAME) -L $(MLX_DIR) -lmlx -L $(LIBFT_DIR) -lft -lXext -lX11
 
 $(MLX_DIR)/$(MLX):
 	@make -C $(MLX_DIR)
 
-$(LIBFTDIR)/$(LIBFT):
-	@make -C $(LIBFTDIR) CFLAGS="$(CFLAGS)"
+$(LIBFT_DIR)/$(LIBFT):
+	@make -C $(LIBFT_DIR)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJS)
 	@cd $(MLX_DIR) && make clean
-	@cd $(LIBFTDIR) && make clean
+	@cd $(LIBFT_DIR) && make clean
 
 fclean: clean
 	@rm -f $(NAME)
-	@cd $(LIBFTDIR) && make fclean
+	@cd $(LIBFT_DIR) && make fclean
 	@cd $(MLX_DIR) && make clean
 
 re: fclean all

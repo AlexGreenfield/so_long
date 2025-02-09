@@ -19,7 +19,7 @@
 	- [Gestion de gráficos]
 		- [Mostar imagen en ventana]
 		- [Cierre con ESC y cruz roja]
-		- [Resize de la ventana]
+		- [Resize de la ventana y minimizar]
 		- [Uso de images de la miniLibx]
 	- [Juego]
 		- [Hacer loop de refresco de cada movimiento o 30 fps]
