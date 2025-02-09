@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:42:07 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/09 17:59:22 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/09 22:50:33 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_map
 {
 	char	**map_array;
 	int		fd;
+	int		y_size;
+	int		x_size;
 }	t_map;
 
 // Parse args

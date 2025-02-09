@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/09 18:01:37 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/09 23:07:49 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		map = malloc(sizeof(t_map));
 		if (!map)
 			return (MALLOC_ERROR);
-		if (!check_ber(argv[1], map))
+		if (check_ber(argv[1], map) != SUCCESS)
 			return (free_main_map(map, FILE_ERROR));
 		return (free_main_map(map, SUCCESS));
 	}
