@@ -10,15 +10,15 @@
 		- [mlx_new_window](#mlx_win)
 		- [mlx_loop](#mlx_loop)
 - [Libería Math]
-- [Desarrollo]
+- [Desarrollo](#desarrollo)
 	- [Gestión del mapa .ber y parseo]
 		- [Gestionar .ber]
 		- [Parseo de caracteres]
 		- [Parseo de rectangulo y muros]
 		- [Parseo de rutas con Flood Fill]
-	- [Gestion de gráficos]
-		- [Mostar imagen en ventana]
-		- [Cierre con ESC y cruz roja]
+	- [Gestion de gráficos](#gestión-de-gráficos)
+		- [Mostar imagen en ventana](#mostrar-imagen-en-ventana)
+		- [Cierre con ESC y cruz roja](#cierre-con-esc-y-cruz)
 		- [Resize de la ventana y minimizar]
 		- [Uso de images de la miniLibx]
 	- [Juego]
@@ -139,6 +139,26 @@ Es el encargado de mantener nuestro proceso en abierto. Sin el, la ventana autom
 
 
 ## Desarrollo
+
+### Gestión del mapa .ber y parseo
+
+Para que sea más fácil gestionar el mapa, debemos de convertir nuestro fichero .ber en un array de strings (parecido al primer rush de la piscina) para luego poder manejarlo mejor y poder hacer todas las comprobaciones necesarias, como el flood fill. Por ahora vamos a usar esta estructura.
+
+```c
+typedef struct s_map
+{
+	char	**map_array;
+	int		fd;
+}	t_map;
+```
+Lo primero de todo, tenemos que alojar la estructura e inicializarla. Después, tenemos que ver es que el argv[1] es un fichero .ber. 
+
+que nos pasen, ver si se puede acceder al archivo y si hacemos el open bien.
+
+		- [Gestionar .ber]
+		- [Parseo de caracteres]
+		- [Parseo de rectangulo y muros]
+		- [Parseo de rutas con Flood Fill]
 
 ### Gestión de gráficos
 

@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:42:07 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/09 14:25:57 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/09 17:59:22 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@
 # define SUCCESS 0
 # define MALLOC_ERROR -1
 # define X_ERROR -2
+# define FILE_ERROR -3
+
 // System libraries
-//#include <X11/Xlib.h>
+# include <X11/Xlib.h>
 
 // MLX struct
 typedef struct s_mlx_data
@@ -37,5 +39,19 @@ typedef struct s_mlx_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_mlx_data;
+
+// Map struct
+typedef struct s_map
+{
+	char	**map_array;
+	int		fd;
+}	t_map;
+
+// Parse args
+int	check_ber(char *arg, t_map *map);
+int	end_ber(char *arg);
+
+// Free map
+int	free_main_map(t_map *map, int flag);
 
 #endif

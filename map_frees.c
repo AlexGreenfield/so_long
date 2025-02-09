@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   map_frees.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/09 18:01:37 by alejandro        ###   ########.fr       */
+/*   Created: 2025/02/09 17:51:26 by alejandro         #+#    #+#             */
+/*   Updated: 2025/02/09 17:58:30 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+int	free_main_map(t_map *map, int flag)
 {
-	t_map	*map;
-
-	if (argc == 2)
-	{
-		map = malloc(sizeof(t_map));
-		if (!map)
-			return (MALLOC_ERROR);
-		if (!check_ber(argv[1], map))
-			return (free_main_map(map, FILE_ERROR));
-		return (free_main_map(map, SUCCESS));
-	}
-	else
+	free (map);
+	if (flag != SUCCESS)
 		write (2, "Error\n", 7);
-	return (SUCCESS);
+	return (flag);
 }
