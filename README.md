@@ -206,7 +206,7 @@ int	check_ber(char *arg, t_map *map)
 		return (FILE_ERROR);
 	if (end_ber(arg))
 		return (FILE_ERROR);
-	if (find_size(map, arg) != SUCCESS || map->y_size < 4 || map->x_size < 4) // Un rectangulo debe de ser como minimo de 4x4 para poder moverse
+	if (find_size(map, arg) != SUCCESS || map->y_size < 3 || map->x_size < 3) // Un rectangulo debe de ser como minimo de 3 para moverse entre los muros
 		return (FILE_ERROR);
 }
 int	find_size(t_map *map, char *arg)
@@ -387,6 +387,26 @@ Necesitamos cerrar la ventana de dos maneras, con nuestro teclado y con nuestro 
 - ¿Hay que crear un buffer que muestre toda la imagen de una vez, en lugar de generarla línea a línea?
 
 - ¿Cuentan los mapas cuadrados?
+
+Si es así, hay que cambiar esta funcion
+
+```c
+int	check_ber(char *arg, t_map *map)
+{
+
+	if (!arg)
+		return (FILE_ERROR);
+	if (bad_ber(arg))
+		return (FILE_ERROR);
+	if (bad_size(map, arg)|| map->y < 4 || map->x < 4 || map->y == map->x)
+		return (FILE_ERROR);
+	ft_printf("X is %d\nY is %d\n", map->x_size, map->y_size);
+	//if (allocate_map(map) != SUCCESS)
+		//return (FILE_ERROR);
+	return (SUCCESS);
+}
+
+- Al alojar el mapa, ¿debe de incorporar los saltos de línea o evitarlos?
 
 
 ## Bibliografía y recursos

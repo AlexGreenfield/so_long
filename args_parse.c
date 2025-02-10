@@ -5,32 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/09 18:04:29 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/09 23:53:24by alejandro        ###   ########.fr       */
+/*   Created: 2025/02/10 20:56:57 by alejandro         #+#    #+#             */
+/*   Updated: 2025/02/10 21:05:34 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	end_ber(char *arg);
-int	find_size(t_map *map, char *arg);
+int	bad_ber(char *arg);
+int	bad_size(t_map *map, char *arg);
+int	allocate_map(t_map *map, char *arg);
 
 int	check_ber(char *arg, t_map *map)
 {
-
 	if (!arg)
 		return (FILE_ERROR);
-	if (end_ber(arg))
+	if (bad_ber(arg))
 		return (FILE_ERROR);
-	if (find_size(map, arg) != SUCCESS || map->y_size < 4 || map->x_size < 4)
+	if (bad_size(map, arg) || map->y_size < 3 || map->x_size < 3)
 		return (FILE_ERROR);
 	ft_printf("X is %d\nY is %d\n", map->x_size, map->y_size);
-	//if (allocate_map(map) != SUCCESS)
-		//return (FILE_ERROR);
-	return (SUCCESS);
+	if (allocate_map(map, arg) != SUCCESS)
+		return (FILE_ERROR);
+	int	i;
+	i = 0;
+	while (map->map_array[i])
+	{
+		printf("%s", map->map_array[i]);
+		i++;
+	}
+	return (free_map_array(map, SUCCESS));
+	//return (SUCCESS);
 }
 
-int	end_ber(char *arg)
+int	bad_ber(char *arg)
 {
 	size_t	arg_len;
 
@@ -40,7 +48,7 @@ int	end_ber(char *arg)
 	return (ft_strncmp (arg + arg_len - 4, ".ber", 4));
 }
 
-int	find_size(t_map *map, char *arg)
+int	bad_size(t_map *map, char *arg)
 {
 	char	*temp;
 	int		flag;
@@ -50,7 +58,7 @@ int	find_size(t_map *map, char *arg)
 		return (FILE_ERROR);
 	flag = SUCCESS;
 	temp = get_next_line(map->fd);
-	if (temp == NULL) 
+	if (temp == NULL)
 		flag = FILE_ERROR;
 	map->y_size = 1;
 	map->x_size = len_set_char(temp);
@@ -66,4 +74,26 @@ int	find_size(t_map *map, char *arg)
 	close(map->fd);
 	map->y_size--;
 	return (flag);
+}
+
+int	allocate_map(t_map *map, char *arg)
+{
+	int	i;
+
+	map->fd = open(arg, O_RDONLY);
+	if (map->fd < 0)
+		return (FILE_ERROR);
+	map->map_array = malloc ((map->y_size + 1) * sizeof(char *));
+	if (!map->map_array)
+		return (MALLOC_ERROR);
+	i = -1;
+	while (i++ < map->y_size)
+	{
+		map->map_array[i] = get_next_line(map->fd); // Alloc of x size for each i to avoid \n jump?
+		if (!map->map_array)
+			return (free_map_array(map, MALLOC_ERROR));
+	}
+	//map->map_array[i] = NULL;
+	close(map->fd);
+	return (SUCCESS);
 }
