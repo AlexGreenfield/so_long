@@ -16,6 +16,7 @@ int	bad_ber(char *arg);
 int	bad_size(t_map *map, char *arg);
 int	allocate_map(t_map *map, char *arg);
 int	bad_walls(t_map *map);
+int	bad_items(t_map *map);
 
 int	check_ber(char *arg, t_map *map)
 {
@@ -29,7 +30,8 @@ int	check_ber(char *arg, t_map *map)
 		return (FILE_ERROR);
 	if (bad_walls(map))
 		return (free_map_array(map, FILE_ERROR));
-
+	if (bad_items(map))
+		return (free_map_array(map, FILE_ERROR));
 	ft_printf("X is %d\nY is %d\n", map->x_size, map->y_size);
 	int	i;
 	i = 0;
@@ -39,16 +41,6 @@ int	check_ber(char *arg, t_map *map)
 		i++;
 	}
 	return (free_map_array(map, SUCCESS));
-}
-
-int	bad_ber(char *arg)
-{
-	size_t	arg_len;
-
-	arg_len = ft_strlen(arg);
-	if (arg_len < 4)
-		return (FILE_ERROR);
-	return (ft_strncmp (arg + arg_len - 4, ".ber", 4));
 }
 
 int	bad_size(t_map *map, char *arg)
@@ -123,10 +115,23 @@ int	bad_walls(t_map *map)
 	while (++i < map->y_size)
 		if (map->map_array[i][0] != '1')
 			return (FILE_ERROR);
-
 	i = -1;
 	while (++i < map->y_size)
 		if (map->map_array[i][map->x_size - 1] != '1')
 			return (FILE_ERROR);
+	return (SUCCESS);
+}
+
+int	bad_items(t_map *map)
+{
+	int	i;
+	int	y;
+
+// Loop through all array
+// If not set character (again), return
+// Get collectionables number in struct, also its position
+// Get exit number in struct, also its position
+// Get player number in struct, also his position
+
 	return (SUCCESS);
 }
