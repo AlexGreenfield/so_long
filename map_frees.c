@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:51:26 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/10 20:58:58 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/10 22:45:22 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	free_map_array(t_map *map, int flag)
 	}
 	free(map->map_array);
 	map->map_array = NULL;
+	if (map->fd)
+		close(map->fd);
 	return (flag);
 }
-

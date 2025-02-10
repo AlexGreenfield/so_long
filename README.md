@@ -306,6 +306,84 @@ int	len_set_char(char	*line)
 
 Ahora toca comprobar que nuestro mapa está rodeado de muros. Para ello, podemos hacer un parseo parecido al del primero rush de la piscina y manejar un array.
 
+Así que antes vamos a alojar todo el mapa dentro de un array char**
+
+```C
+int	allocate_map(t_map *map, char *arg)
+{
+	int		i;
+	char	*temp; // Temporal para alojar el gnl
+
+	map->fd = open(arg, O_RDONLY);
+	if (map->fd < 0)
+		return (FILE_ERROR);
+	map->map_array = malloc ((map->y_size + 1) * sizeof(char *)); // Alojamos el numero total de filas (acuerdate del +1 para el NULL)
+	if (!map->map_array)
+		return (MALLOC_ERROR);
+	i = -1;
+	while (i++ < map->y_size) // Inicializamos la estructura por si la tenemos que liberar el algun momento, ya que no podemos usar calloc
+		map->map_array[i] = NULL;
+	i = -1;
+	while (i++ < map->y_size - 1)
+	{
+		temp = get_next_line(map->fd);
+		map->map_array[i] = ft_substr(temp, 0, map->x_size); // Substring para quitar el \n del final y tener nuestro array limpio
+		free (temp);
+		temp = NULL;
+		if (!map->map_array[i]) // Si en algun momento falla el alojo de memoria, estate preparado para limpiar y cerrar todo
+			return (free_map_array(map, MALLOC_ERROR));
+	}
+	close(map->fd);
+	return (SUCCESS);
+}
+
+int	free_map_array(t_map *map, int flag)
+{
+	int	i;
+
+	if (!map || !map->map_array)
+		return (flag);
+	i = 0;
+	while (map->map_array[i]) // Como el resto del array esta inicializado en NULL, no nos debemos preocupar
+	{
+		free(map->map_array[i]);
+		i++;
+	}
+	free(map->map_array);
+	map->map_array = NULL;
+	if (map->fd) // Acuerdate de cerrar el fd incluso si falla algo
+		close(map->fd);
+	return (flag);
+}
+```
+
+Ahora que ya tenemos nuestro mapa alojado en un array, podemos navegarlo con facilidad para comprobrar las paredes
+
+```c
+int	bad_walls(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	while (map->map_array[0][++i]) // Navegamos la primera fila hasta llegar a NULL
+		if (map->map_array[0][i] != '1')
+			return (FILE_ERROR);
+	i = -1;
+	while (map->map_array[map->y_size - 1][++i]) // Navegamos la ultima fila hasta llegar a NULL
+		if (map->map_array[map->y_size - 1][i] != '1')
+			return (FILE_ERROR);
+	i = -1;
+	while (++i < map->y_size) // En cuanto columnas, no podemos recorrerlas en base a NULL, por lo que dependemos de y_size
+		if (map->map_array[i][0] != '1')
+			return (FILE_ERROR);
+
+	i = -1;
+	while (++i < map->y_size) // zlo mismo por aqui
+		if (map->map_array[i][map->x_size - 1] != '1')
+			return (FILE_ERROR);
+	return (SUCCESS);
+}
+```
 
 #### Parseo de rutas con Flood Fill
 
@@ -408,7 +486,57 @@ int	check_ber(char *arg, t_map *map)
 
 - Al alojar el mapa, ¿debe de incorporar los saltos de línea o evitarlos?
 
+Evitando saltos 
 
+```c
+int	allocate_map(t_map *map, char *arg)
+{
+	int		i;
+	char	*temp;
+
+	map->fd = open(arg, O_RDONLY);
+	if (map->fd < 0)
+		return (FILE_ERROR);
+	map->map_array = malloc ((map->y_size + 1) * sizeof(char *));
+	if (!map->map_array)
+		return (MALLOC_ERROR);
+	i = -1;
+	while (i++ < map->y_size)
+	{
+		temp = get_next_line(map->fd);
+		map->map_array[i] = ft_substr(temp, 0, map->x_size);
+		free (temp);
+		if (!map->map_array)
+			return (free_map_array(map, MALLOC_ERROR));
+	}
+	close(map->fd);
+	return (SUCCESS);
+}
+```
+
+Con saltos
+
+```C
+int	allocate_map(t_map *map, char *arg)
+{
+	int		i;
+
+	map->fd = open(arg, O_RDONLY);
+	if (map->fd < 0)
+		return (FILE_ERROR);
+	map->map_array = malloc ((map->y_size + 1) * sizeof(char *));
+	if (!map->map_array)
+		return (MALLOC_ERROR);
+	i = -1;
+	while (i++ < map->y_size)
+	{
+		map->map_array[i] = get_next_line(map->fd);
+		if (!map->map_array)
+			return (free_map_array(map, MALLOC_ERROR));
+	}
+	close(map->fd);
+	return (SUCCESS);
+}
 ## Bibliografía y recursos
 
 ### Páginas web

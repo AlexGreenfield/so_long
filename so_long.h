@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:42:07 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/10 20:59:08 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/10 22:52:46 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	check_ber(char *arg, t_map *map);
 int	bad_ber(char *arg);
 int	bad_size(t_map *map, char *arg);
 int	allocate_map(t_map *map, char *arg);
+int	bad_walls(t_map *map);
 
 // Ags utils
 int	len_set_char(char	*line);

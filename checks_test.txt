@@ -1,0 +1,13 @@
+## Comando consola
+
+valgrind --track-fds=all ./so_long map1.ber
+
+## Impresion mapa ya parseado
+
+int	i;
+	i = 0;
+	while (map->map_array[i])
+	{
+		printf("%s\n", map->map_array[i]);
+		i++;
+	}
