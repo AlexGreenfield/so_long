@@ -13,27 +13,20 @@
 #include "so_long.h"
 
 int	end_ber(char *arg);
-int	find_size(t_map *map);
+int	find_size(t_map *map, char *arg);
 
 int	check_ber(char *arg, t_map *map)
 {
-	//char	*split;
 
 	if (!arg)
 		return (FILE_ERROR);
 	if (end_ber(arg))
 		return (FILE_ERROR);
-	map->map_array = NULL;
-	map->fd = open(arg, O_RDONLY);
-	if (map->fd < 0)
+	if (find_size(map, arg) != SUCCESS || map->y_size < 4 || map->x_size < 4)
 		return (FILE_ERROR);
-	if (find_size(map) != SUCCESS || map->y_size < 3 || map->x_size < 3)
-	{
-		ft_printf("map y size is %d\nand x is %d\n", map->y_size, map->x_size);
-		return (FILE_ERROR);
-	}
-	ft_printf("map y size is %d\nand x is %d\n", map->y_size, map->x_size);
-	close (map->fd);
+	ft_printf("X is %d\nY is %d\n", map->x_size, map->y_size);
+	//if (allocate_map(map) != SUCCESS)
+		//return (FILE_ERROR);
 	return (SUCCESS);
 }
 
@@ -47,31 +40,30 @@ int	end_ber(char *arg)
 	return (ft_strncmp (arg + arg_len - 4, ".ber", 4));
 }
 
-int	find_size(t_map *map)
+int	find_size(t_map *map, char *arg)
 {
 	char	*temp;
 	int		flag;
 
+	map->fd = open(arg, O_RDONLY);
+	if (map->fd < 0)
+		return (FILE_ERROR);
 	flag = SUCCESS;
 	temp = get_next_line(map->fd);
-	if (temp == NULL)
-		return (FILE_ERROR);
+	if (temp == NULL) 
+		flag = FILE_ERROR;
 	map->y_size = 1;
-	map->x_size = ft_strlen(temp);
+	map->x_size = len_set_char(temp);
 	while (temp)
 	{
 		if (temp)
 			free (temp);
 		temp = get_next_line(map->fd);
-		if (temp != NULL && (ft_strlen(temp) != (size_t)(map->x_size)))
+		if (temp != NULL && (len_set_char(temp) != map->x_size))
 			flag = FILE_ERROR;
-		ft_printf("flag is %d\n", flag);
 		map->y_size++;
 	}
-	if (temp)
-		free (temp);
-	map->x_size--;
+	close(map->fd);
 	map->y_size--;
-	ft_printf("flag is %d\n", flag);
 	return (flag);
 }

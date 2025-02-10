@@ -11,7 +11,8 @@ MLX_DIR = minilibx-linux/
 # Sources and objects
 SRCS = so_long.c \
 		args_parse.c \
-		map_frees.c
+		map_frees.c \
+		args_utils.c 
 
 OBJS = $(SRCS:%.c=%.o)
 

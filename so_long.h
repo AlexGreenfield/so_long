@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:42:07 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/09 22:50:33 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/10 20:14:16 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ typedef struct s_map
 // Parse args
 int	check_ber(char *arg, t_map *map);
 int	end_ber(char *arg);
+int	find_size(t_map *map, char *arg);
+
+// Ags utils
+int	len_set_char(char	*line);
 
 // Free map
 int	free_main_map(t_map *map, int flag);

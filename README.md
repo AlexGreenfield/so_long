@@ -11,10 +11,10 @@
 		- [mlx_loop](#mlx_loop)
 - [Libería Math]
 - [Desarrollo](#desarrollo)
-	- [Gestión del mapa .ber y parseo]
-		- [Gestionar .ber]
-		- [Parseo de caracteres]
-		- [Parseo de rectangulo y muros]
+	- [Gestión del mapa .ber y parseo](#gestión-del-mapa-ber-y-parseo)
+		- [Gestionar .ber](#gestionar-ber)
+		- [Parseo de recangulo y caracteres](#open-read-parseo-de-caracteres-y-comprobar-rectangulo)
+		- [Parseo de muros]
 		- [Parseo de rutas con Flood Fill]
 	- [Gestion de gráficos](#gestión-de-gráficos)
 		- [Mostar imagen en ventana](#mostrar-imagen-en-ventana)
@@ -149,16 +149,165 @@ typedef struct s_map
 {
 	char	**map_array;
 	int		fd;
+	int		y_size;
+	int		x_size;
 }	t_map;
 ```
-Lo primero de todo, tenemos que alojar la estructura e inicializarla. Después, tenemos que ver es que el argv[1] es un fichero .ber. 
 
-que nos pasen, ver si se puede acceder al archivo y si hacemos el open bien.
+#### Gestionar ber
 
-		- [Gestionar .ber]
-		- [Parseo de caracteres]
-		- [Parseo de rectangulo y muros]
-		- [Parseo de rutas con Flood Fill]
+Lo primero de todo, tenemos que ver es que el argv[1] es un fichero .ber. 
+
+```C
+int	check_ber(char *arg, t_map *map)
+{
+	if (!arg)
+		return (FILE_ERROR);
+	if (end_ber(arg))
+		return (FILE_ERROR);
+}
+
+int	end_ber(char *arg)
+{
+	size_t	arg_len;
+
+	arg_len = ft_strlen(arg);
+	if (arg_len < 4)
+		return (FILE_ERROR);
+	return (ft_strncmp (arg + arg_len - 4, ".ber", 4));
+}
+```
+#### Open, read, parseo de caracteres y comprobar rectangulo
+
+Una vez que tenemos un fichero .ber, tenemos que ver si lo podemos abrir.
+
+```c
+int	check_ber(char *arg, t_map *map)
+{
+	if (!arg)
+		return (FILE_ERROR);
+	if (end_ber(arg))
+		return (FILE_ERROR);
+	map->fd = open(arg, O_RDONLY);
+	if (map->fd < 0)
+		return (FILE_ERROR);
+}
+```
+
+Ahora viene uno de los primeros parseos importantes: ver si se puede abrir el fichero, si estamos ante un rectangulo y si tenemos los caracteres adecuados.
+
+Lo primero, vamos a ver si se puede abrir el fichero
+
+```c
+int	check_ber(char *arg, t_map *map)
+{
+
+	if (!arg)
+		return (FILE_ERROR);
+	if (end_ber(arg))
+		return (FILE_ERROR);
+	if (find_size(map, arg) != SUCCESS || map->y_size < 4 || map->x_size < 4) // Un rectangulo debe de ser como minimo de 4x4 para poder moverse
+		return (FILE_ERROR);
+}
+int	find_size(t_map *map, char *arg)
+{
+	char	*temp;
+	int		flag;
+
+	map->fd = open(arg, O_RDONLY);
+	if (map->fd < 0)
+		return (FILE_ERROR);
+	close(map->fd); // Acuerdate de cerrar el fd
+	return (SUCCESS);
+}
+```
+
+Para el rectangulo, tenemos que primero hayar las dimensiones de nuestro mapa. Empezemos con y, que es el número de filas que tiene el mapa. Para ello, basta con saber el número de llamadas que se hacen a GNL hasta acabar la lectura.
+
+```c
+int	find_size(t_map *map, char *arg)
+{
+	char	*temp;
+	int		ddflag;
+
+	map->fd = open(arg, O_RDONLY);
+	if (map->fd < 0)
+		return (FILE_ERROR);
+	flag = SUCCESS;
+	temp = get_next_line(map->fd);
+	if (temp == NULL) 
+		flag = FILE_ERROR;
+	map->y_size = 1;
+	while (temp)
+	{
+		if (temp)
+			free (temp);
+		temp = get_next_line(map->fd);
+		map->y_size++;
+	}
+	close(map->fd);
+	map->y_size--; // Restamos uno por que la ultima lectura de GNL nos va a dar NULL
+	return (flag);
+}
+```
+
+Aprovechando que estamos averiguando el tamaño en y línea a línea, podemos aprovechar para leer cada una de estas líneas, ver su tamaño y si contiene algún caracter que sea inadecuado.
+
+```c
+int	find_size(t_map *map, char *arg)
+{
+	char	*temp;
+	int		flag;
+
+	map->fd = open(arg, O_RDONLY);
+	if (map->fd < 0)
+		return (FILE_ERROR);
+	flag = SUCCESS;
+	temp = get_next_line(map->fd);
+	if (temp == NULL) 
+		flag = FILE_ERROR;
+	map->y_size = 1;
+	map->x_size = len_set_char(temp);
+	while (temp)
+	{
+		if (temp)
+			free (temp);
+		temp = get_next_line(map->fd);
+		if (temp != NULL && (len_set_char(temp) != map->x_size))
+			flag = FILE_ERROR;
+		map->y_size++;
+	}
+	close(map->fd);
+	map->y_size--;
+	return (flag);
+}
+
+int	len_set_char(char	*line)
+{
+	ssize_t	string_size;
+	char	*set;
+
+	if (!line)
+		return (0);
+	string_size = 0;
+	set = "10PCE";
+	while (*line && *line != '\n')
+	{
+		if (!ft_strchr(set, *line))
+			return (FILE_ERROR);
+		string_size++;
+		line++;
+	}
+	return (string_size);
+}
+```
+
+#### Parseo de muros
+
+Ahora toca comprobar que nuestro mapa está rodeado de muros. Para ello, podemos hacer un parseo parecido al del primero rush de la piscina y manejar un array.
+
+
+#### Parseo de rutas con Flood Fill
 
 ### Gestión de gráficos
 
@@ -236,6 +385,9 @@ Necesitamos cerrar la ventana de dos maneras, con nuestro teclado y con nuestro 
 ## Dudas y preguntas
 
 - ¿Hay que crear un buffer que muestre toda la imagen de una vez, en lugar de generarla línea a línea?
+
+- ¿Cuentan los mapas cuadrados?
+
 
 ## Bibliografía y recursos
 
