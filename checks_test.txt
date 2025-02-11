@@ -11,3 +11,6 @@ int	i;
 		printf("%s\n", map->map_array[i]);
 		i++;
 	}
+
+## Data objetos mapa
+ft_printf("c is %d\ne is %d\np is %d\npy is %d\npx is %d\n", map->c, map->e, map->p, map->p_y, map->p_x);

@@ -156,7 +156,7 @@ typedef struct s_map
 
 #### Gestionar ber
 
-Lo primero de todo, tenemos que ver es que el argv[1] es un fichero .ber. 
+Lo primero de todo, tenemos que ver es que el argv[1] es un fichero .ber.
 
 ```C
 int	check_ber(char *arg, t_map *map)
@@ -235,7 +235,7 @@ int	find_size(t_map *map, char *arg)
 		return (FILE_ERROR);
 	flag = SUCCESS;
 	temp = get_next_line(map->fd);
-	if (temp == NULL) 
+	if (temp == NULL)
 		flag = FILE_ERROR;
 	map->y_size = 1;
 	while (temp)
@@ -264,7 +264,7 @@ int	find_size(t_map *map, char *arg)
 		return (FILE_ERROR);
 	flag = SUCCESS;
 	temp = get_next_line(map->fd);
-	if (temp == NULL) 
+	if (temp == NULL)
 		flag = FILE_ERROR;
 	map->y_size = 1;
 	map->x_size = len_set_char(temp);
@@ -486,7 +486,7 @@ int	check_ber(char *arg, t_map *map)
 
 - Al alojar el mapa, ¿debe de incorporar los saltos de línea o evitarlos?
 
-Evitando saltos 
+Evitando saltos
 
 ```c
 int	allocate_map(t_map *map, char *arg)
@@ -537,6 +537,9 @@ int	allocate_map(t_map *map, char *arg)
 	close(map->fd);
 	return (SUCCESS);
 }
+
+- Tengo la posición de P, ¿necesito la de E?
+
 ## Bibliografía y recursos
 
 ### Páginas web

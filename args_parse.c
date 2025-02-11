@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   args_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 22:44:14 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/10 23:07:45y alejandro        ###   ########.fr       */
+/*   Created: 2025/02/11 21:28:30 by acastrov          #+#    #+#             */
+/*   Updated: 2025/02/11 21:30:06 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	bad_ber(char *arg);
-int	bad_size(t_map *map, char *arg);
 int	allocate_map(t_map *map, char *arg);
 int	bad_walls(t_map *map);
 int	bad_items(t_map *map);
+int	bad_flood(t_map *map);
 
 int	check_ber(char *arg, t_map *map)
 {
@@ -32,43 +31,9 @@ int	check_ber(char *arg, t_map *map)
 		return (free_map_array(map, FILE_ERROR));
 	if (bad_items(map))
 		return (free_map_array(map, FILE_ERROR));
-	ft_printf("X is %d\nY is %d\n", map->x_size, map->y_size);
-	int	i;
-	i = 0;
-	while (map->map_array[i])
-	{
-		printf("%s\n", map->map_array[i]);
-		i++;
-	}
+	if (bad_flood(map))
+		return (free_map_array(map, FILE_ERROR));
 	return (free_map_array(map, SUCCESS));
-}
-
-int	bad_size(t_map *map, char *arg)
-{
-	char	*temp;
-	int		flag;
-
-	map->fd = open(arg, O_RDONLY);
-	if (map->fd < 0)
-		return (FILE_ERROR);
-	flag = SUCCESS;
-	temp = get_next_line(map->fd);
-	if (temp == NULL)
-		flag = FILE_ERROR;
-	map->y_size = 1;
-	map->x_size = len_set_char(temp);
-	while (temp)
-	{
-		if (temp)
-			free (temp);
-		temp = get_next_line(map->fd);
-		if (temp != NULL && (len_set_char(temp) != map->x_size))
-			flag = FILE_ERROR;
-		map->y_size++;
-	}
-	close(map->fd);
-	map->y_size--;
-	return (flag);
 }
 
 int	allocate_map(t_map *map, char *arg)
@@ -79,7 +44,7 @@ int	allocate_map(t_map *map, char *arg)
 	map->fd = open(arg, O_RDONLY);
 	if (map->fd < 0)
 		return (FILE_ERROR);
-	map->map_array = malloc ((map->y_size + 1) * sizeof(char *));
+	map->map_array = malloc((map->y_size + 1) * sizeof(char *));
 	if (!map->map_array)
 		return (MALLOC_ERROR);
 	i = -1;
@@ -90,7 +55,7 @@ int	allocate_map(t_map *map, char *arg)
 	{
 		temp = get_next_line(map->fd);
 		map->map_array[i] = ft_substr(temp, 0, map->x_size);
-		free (temp);
+		free(temp);
 		temp = NULL;
 		if (!map->map_array[i])
 			return (free_map_array(map, MALLOC_ERROR));
@@ -103,6 +68,11 @@ int	bad_walls(t_map *map)
 {
 	int	i;
 
+	map->c = 0;
+	map->e = 0;
+	map->p = 0;
+	map->p_x = 0;
+	map->p_y = 0;
 	i = -1;
 	while (map->map_array[0][++i])
 		if (map->map_array[0][i] != '1')
@@ -124,14 +94,40 @@ int	bad_walls(t_map *map)
 
 int	bad_items(t_map *map)
 {
-	int	i;
+	int	x;
 	int	y;
 
-// Loop through all array
-// If not set character (again), return
-// Get collectionables number in struct, also its position
-// Get exit number in struct, also its position
-// Get player number in struct, also his position
+	y = -1;
+	while (++y < map->y_size)
+	{
+		x = -1;
+		while (++x < map->x_size)
+		{
+			if (map->map_array[y][x] == 'C')
+				map->c++;
+			if (map->map_array[y][x] == 'E')
+				map->e++;
+			if (map->map_array[y][x] == 'P')
+			{
+				map->p++;
+				map->p_y = y;
+				map->p_x = x;
+			}
+		}
+	}
+	if (map->p != 1 || map->e != 1 || map->c == 0)
+		return (FILE_ERROR);
+	return (SUCCESS);
+}
 
+int	bad_flood(t_map *map)
+{
+	map->fill_c = 0;
+	map->fill_e = 0;
+	fill(map, map->map_array, map->p_y, map->p_x);
+	if (map->fill_c != map->c)
+		return (FILE_ERROR);
+	if (map->fill_e != map->e)
+		return (FILE_ERROR);
 	return (SUCCESS);
 }

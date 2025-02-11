@@ -12,7 +12,8 @@ MLX_DIR = minilibx-linux/
 SRCS = so_long.c \
 		args_parse.c \
 		map_frees.c \
-		args_utils.c 
+		args_utils.c \
+		init_so_long_utils.c
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -28,13 +29,20 @@ BLUE   = \033[0;34m
 RESET  = \033[0m
 
 # Rules
-all: $(NAME)
+all: modules $(NAME)
 
 $(NAME): $(OBJS) $(MLX_DIR)/$(MLX) $(LIBFT_DIR)/$(LIBFT)
 	@echo "\n\n$(BLUE)Linking object files and libraries...$(RESET)\n\n"
 	cc $(OBJS) -o $(NAME) -L $(MLX_DIR) -lmlx -L $(LIBFT_DIR) -lft -lXext -lX11
 	@echo "\n\n$(GREEN)Build complete!$(RESET)\n\n"
 
+$(MLX_DIR)/Makefile:
+	git submodule update --init --recursive
+
+$(LIBFT_DIR)/Makefile:
+	git submodule update --init --recursive
+
+modules: $(LIBFT_DIR)/Makefile $(MLX_DIR)/Makefile
 
 $(MLX_DIR)/$(MLX):
 	@echo "\n\n$(YELLOW)Compiling MinilibX...$(RESET)\n\n"

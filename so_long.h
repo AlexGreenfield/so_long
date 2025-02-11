@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:42:07 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/10 22:52:46 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/11 21:24:05 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,38 @@ typedef struct s_map
 	int		fd;
 	int		y_size;
 	int		x_size;
+	int		c;
+	int		fill_c;
+	int		e;
+	int		fill_e;
+	int		p;
+	int		p_x;
+	int		p_y;
 }	t_map;
 
+// Main
+int	init_so_long(t_map *map);
+
 // Parse args
-int	check_ber(char *arg, t_map *map);
-int	bad_ber(char *arg);
-int	bad_size(t_map *map, char *arg);
-int	allocate_map(t_map *map, char *arg);
-int	bad_walls(t_map *map);
+int		check_ber(char *arg, t_map *map);
+int		allocate_map(t_map *map, char *arg);
+int		bad_walls(t_map *map);
+int		bad_items(t_map *map);
+int		bad_flood(t_map *map);
 
 // Ags utils
-int	len_set_char(char	*line);
+int		len_set_char(char	*line);
+int		bad_ber(char *arg);
+int		bad_size(t_map *map, char *arg);
+void	fill(t_map *map, char **map_array, int y, int x);
 
 // Free map
-int	free_main_map(t_map *map, int flag);
-int	free_map_array(t_map *map, int flag);
+int		free_main_map(t_map *map, int flag);
+int		free_map_array(t_map *map, int flag);
+
+// Init so_long_utils
+int		handle_input(int keysym, t_mlx_data *mlx);
+int		button_press(int button, int x, int y, t_mlx_data *mlx);
+int		close_window(t_mlx_data *mlx);
 
 #endif
