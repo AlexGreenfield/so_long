@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:28:30 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/12 17:47:36 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:46:33 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	bad_flood(t_map *map)
 {
 	char **map_copy;
 
-	map_copy = map->map_array;
+	map_copy = map->map_array; // Use argdup from pushswap, and remember to free well this copy
 	map->fill_c = 0;
 	map->fill_e = 0;
 	fill(map, map_copy, map->p_y, map->p_x);
