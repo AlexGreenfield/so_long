@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:28:30 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/11 21:30:06 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:47:36 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ int	check_ber(char *arg, t_map *map)
 		return (free_map_array(map, FILE_ERROR));
 	if (bad_flood(map))
 		return (free_map_array(map, FILE_ERROR));
+	int	i;
+	i = 0;
+	while (map->map_array[i])
+	{
+		printf("%s\n", map->map_array[i]);
+		i++;
+	}
 	return (free_map_array(map, SUCCESS));
 }
 
@@ -122,9 +129,12 @@ int	bad_items(t_map *map)
 
 int	bad_flood(t_map *map)
 {
+	char **map_copy;
+
+	map_copy = map->map_array;
 	map->fill_c = 0;
 	map->fill_e = 0;
-	fill(map, map->map_array, map->p_y, map->p_x);
+	fill(map, map_copy, map->p_y, map->p_x);
 	if (map->fill_c != map->c)
 		return (FILE_ERROR);
 	if (map->fill_e != map->e)
