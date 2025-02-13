@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 19:30:10 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/11 20:47:10 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:09:17 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int		bad_ber(char *arg);
 int		bad_size(t_map *map, char *arg);
 void	fill(t_map *map, char **map_array, int y, int x);
+char	**ft_arraydup(char **argv);
 
-int	len_set_char(char	*line)
+int	len_set_char(char *line)
 {
 	ssize_t	string_size;
 	char	*set;
@@ -42,7 +43,7 @@ int	bad_ber(char *arg)
 	arg_len = ft_strlen(arg);
 	if (arg_len < 4)
 		return (FILE_ERROR);
-	return (ft_strncmp (arg + arg_len - 4, ".ber", 4));
+	return (ft_strncmp(arg + arg_len - 4, ".ber", 4));
 }
 
 int	bad_size(t_map *map, char *arg)
@@ -92,4 +93,31 @@ void	fill(t_map *map, char **map_array, int y, int x)
 	fill(map, map_array, y, x - 1);
 	fill(map, map_array, y + 1, x);
 	fill(map, map_array, y - 1, x);
+}
+
+char	**ft_arraydup(char **argv)
+{
+	int		i;
+	int		j;
+	char	**new_array;
+
+	i = 0;
+	while (argv[i] != NULL)
+		i++;
+	new_array = malloc((i + 1) * sizeof(char *));
+	if (!new_array)
+		return (NULL);
+	j = 0;
+	while (j < i)
+	{
+		new_array[j] = strdup(argv[j]);
+		if (!new_array[j])
+		{
+			ft_free_argv_split(new_array);
+			return (NULL);
+		}
+		j++;
+	}
+	new_array[i] = NULL;
+	return (new_array);
 }

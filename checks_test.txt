@@ -4,6 +4,7 @@ valgrind --track-fds=all ./so_long map1.ber
 
 ## Impresion mapa ya parseado
 
+printf("\nmap_og\n");
 int	i;
 	i = 0;
 	while (map->map_array[i])
