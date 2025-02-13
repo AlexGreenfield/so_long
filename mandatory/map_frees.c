@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:51:26 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/11 21:15:46 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/13 19:53:44 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 int	free_main_map(t_map *map, int flag);
 int	free_map_array(t_map *map, int flag);

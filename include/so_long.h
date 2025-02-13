@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:42:07 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/12 21:21:16 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/13 20:17:15 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define SO_LONG_H
 
 // User libraries
-# include "minilibx-linux/mlx.h"
-# include "minilibx-linux/mlx_int.h"
-# include "libft/libft.h"
+# include "../lib/libft/libft.h"
 
 // X11 libraries
 # include <X11/keysym.h>
@@ -71,7 +69,6 @@ int		len_set_char(char	*line);
 int		bad_ber(char *arg);
 int		bad_size(t_map *map, char *arg);
 void	fill(t_map *map, char **map_array, int y, int x);
-char	**ft_arraydup(char **argv);
 
 // Free map
 int		free_main_map(t_map *map, int flag);

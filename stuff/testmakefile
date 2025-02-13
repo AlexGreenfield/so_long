@@ -2,25 +2,20 @@ NAME = so_long
 
 # Libft
 LIBFT = libft.a
-LIBFT_DIR = ./lib/libft
+LIBFT_DIR = libft/
 
-# libmx
-LIBMLX	:= ./lib/MLX42
-HEADERS	:= -I ./include -I $(LIBMLX)/include
-
-# Compiling libs and flags
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L $(LIBFT_DIR) -lft
+# MLX
+MLX = libmlx.a
+MLX_DIR = minilibx-linux/
 
 # Sources and objects
-SRCS_DIR = ./mandatory/
 SRCS = so_long.c \
 		args_parse.c \
 		map_frees.c \
 		args_utils.c \
 		init_so_long_utils.c
 
-DIR_PREFIX = $(addprefix $(SRCS_DIR), $(SRCS))
-OBJS = $(DIR_PREFIX:.c=.o)
+OBJS = $(SRCS:%.c=%.o)
 
 # Compilation
 CC = cc
@@ -34,16 +29,24 @@ BLUE   = \033[0;34m
 RESET  = \033[0m
 
 # Rules
-all: libmlx $(NAME)
+all: modules $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_DIR)/$(LIBFT)
+$(NAME): $(OBJS) $(MLX_DIR)/$(MLX) $(LIBFT_DIR)/$(LIBFT)
 	@echo "\n\n$(BLUE)Linking object files and libraries...$(RESET)\n\n"
-	cc $(OBJS) -o $(NAME) -g3 $(LIBS)
+	cc $(OBJS) -o $(NAME) -g3 -L $(MLX_DIR) -lmlx -L $(LIBFT_DIR) -lft -lXext -lX11
 	@echo "\n\n$(GREEN)Build complete!$(RESET)\n\n"
 
-libmlx:
+$(MLX_DIR)/Makefile:
+	git submodule update --init --recursive
+
+$(LIBFT_DIR)/Makefile:
+	git submodule update --init --recursive
+
+modules: $(LIBFT_DIR)/Makefile $(MLX_DIR)/Makefile
+
+$(MLX_DIR)/$(MLX):
 	@echo "\n\n$(YELLOW)Compiling MinilibX...$(RESET)\n\n"
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+	@make -C $(MLX_DIR)
 
 $(LIBFT_DIR)/$(LIBFT):
 	@echo "\n\n$(YELLOW)Compiling Libft...$(RESET)\n\n"
@@ -51,17 +54,19 @@ $(LIBFT_DIR)/$(LIBFT):
 
 %.o: %.c
 	@echo "\n\n$(BLUE)Compiling $<...$(RESET)\n\n"
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "\n\n$(RED)Cleaning object files...$(RESET)\n\n"
 	@rm -f $(OBJS)
-	@rm -rf $(LIBMLX)/build
+	@cd $(MLX_DIR) && make clean
+	@cd $(LIBFT_DIR) && make clean
 
 fclean: clean
 	@echo "\n\n$(RED)Cleaning all...$(RESET)\n\n"
 	@rm -f $(NAME)
 	@cd $(LIBFT_DIR) && make fclean
+	@cd $(MLX_DIR) && make clean
 
 re: fclean all
 

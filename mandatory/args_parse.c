@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:28:30 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/13 17:19:01 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/13 21:04:21 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 int	allocate_map(t_map *map, char *arg);
 int	bad_walls(t_map *map);
@@ -129,7 +129,7 @@ int	bad_flood(t_map *map)
 	map->fill_c = 0;
 	map->fill_e = 0;
 	fill(map, map_copy, map->p_y, map->p_x);
-	ft_free_argv_split(map_copy);
+	ft_free_array(map_copy);
 	if (map->fill_c != map->c)
 		return (FILE_ERROR);
 	if (map->fill_e != map->e)
