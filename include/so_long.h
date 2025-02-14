@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:42:07 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/13 20:17:15 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/14 19:29:19 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 // User libraries
 # include "../lib/libft/libft.h"
 
-// X11 libraries
-# include <X11/keysym.h>
+// MLX_42
+#include "../lib/MLX42/include/MLX42/MLX42.h"
+
 
 // System libraries
 # include <stdio.h>
@@ -30,13 +31,6 @@
 
 // System libraries
 # include <X11/Xlib.h>
-
-// MLX struct
-typedef struct s_mlx_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-}	t_mlx_data;
 
 // Map struct
 typedef struct s_map
@@ -75,8 +69,5 @@ int		free_main_map(t_map *map, int flag);
 int		free_map_array(t_map *map, int flag);
 
 // Init so_long_utils
-int		handle_input(int keysym, t_mlx_data *mlx);
-int		button_press(int button, int x, int y, t_mlx_data *mlx);
-int		close_window(t_mlx_data *mlx);
 
 #endif

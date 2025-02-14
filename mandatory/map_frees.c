@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:51:26 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/14 18:55:26 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/14 19:04:52 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	free_map_array(t_map *map, int flag);
 
 int	free_main_map(t_map *map, int flag)
 {
-	if (map->map_array)
-		free_map_array (map, flag);
 	free (map);
 	if (flag != SUCCESS)
 		write (2, "Error\n", 7);

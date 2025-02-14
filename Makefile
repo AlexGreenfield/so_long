@@ -57,6 +57,8 @@ clean:
 	@echo "\n\n$(RED)Cleaning object files...$(RESET)\n\n"
 	@rm -f $(OBJS)
 	@rm -rf $(LIBMLX)/build
+	@cd $(LIBFT_DIR) && make clean
+
 
 fclean: clean
 	@echo "\n\n$(RED)Cleaning all...$(RESET)\n\n"
