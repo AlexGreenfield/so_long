@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/13 19:55:07 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:54:05 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main(int argc, char **argv)
 			return (MALLOC_ERROR);
 		if (check_ber(argv[1], map) != SUCCESS)
 			return (free_main_map(map, FILE_ERROR));
-		//if (init_so_long(map) != SUCCESS)
-			//return (free_main_map(map, X_ERROR));
+		if (init_so_long(map) != SUCCESS)
+			return (free_main_map(map, X_ERROR));
 		return (free_main_map(map, SUCCESS));
 	}
 	else
@@ -34,8 +34,17 @@ int	main(int argc, char **argv)
 	return (SUCCESS);
 }
 
-//int	init_so_long(t_map *map)
-//{
+int	init_so_long(t_map *map)
+{
+printf("\nmap_og\n");
+int	i;
+	i = 0;
+	while (map->map_array[i])
+	{
+		printf("%s\n", map->map_array[i]);
+		i++;
+	}
+return (0);
 	//t_mlx_data	mlx;
 	//int			i;
 
@@ -59,4 +68,4 @@ int	main(int argc, char **argv)
 	//mlx_destroy_display(mlx.mlx_ptr);
 	//free(mlx.mlx_ptr);
 	//return (SUCCESS);
-//}
+}

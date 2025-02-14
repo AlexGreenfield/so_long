@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:28:30 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/13 21:04:21 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:57:03 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int	check_ber(char *arg, t_map *map)
 		return (free_map_array(map, FILE_ERROR));
 	if (bad_flood(map))
 		return (free_map_array(map, FILE_ERROR));
-	//return (free_map_array(map, SUCCESS)); // Maybe we need to not destroy the map until exit
-	return (SUCCESS); // Maybe we need to not destroy the map until exit
+	return (SUCCESS);
 }
 
 int	allocate_map(t_map *map, char *arg)
