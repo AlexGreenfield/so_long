@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/14 20:34:53 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/14 21:10:58 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	init_so_long(t_map *map)
 	mlx_texture_t	*texture;
 	mlx_image_t		*img;
 
-	mlx = mlx_init(720, 480, "test", true);
+	mlx = mlx_init(1920, 1080, "test", true);
 	if (!mlx)
 		return (X_ERROR);
-	texture = mlx_load_png("./textures/boards/board_plain_05.png");
+	texture = mlx_load_png("./textures/renders/board_1136.png");
 	if (!texture)
 	{
 		printf("fail to open texture");
