@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/14 21:10:58 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/15 14:24:04 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,48 +39,38 @@ int	main(int argc, char **argv)
 int	init_so_long(t_map *map)
 {
 	mlx_t			*mlx;
-	mlx_texture_t	*texture;
-	mlx_image_t		*img;
+	t_textures		*textures;
 
-	mlx = mlx_init(1920, 1080, "test", true);
+	mlx = mlx_init((WIDTH * map->x_size), (HEIGHT * map->y_size), "King's Pawns", false);
 	if (!mlx)
 		return (X_ERROR);
-	texture = mlx_load_png("./textures/renders/board_1136.png");
-	if (!texture)
-	{
-		printf("fail to open texture");
-		return (X_ERROR);
-	}
-	img = mlx_texture_to_image(mlx, texture);
-	if (!img)
-	{
-		printf("fail to texture to img");
-		return (X_ERROR);
-	}
-	if (mlx_image_to_window(mlx, img, 0, 0) < 0)
-		return (X_ERROR);
+	textures = malloc (sizeof(t_textures));
+	if (!textures)
+		return (MALLOC_ERROR);
+	if (init_board(map, mlx, textures) != SUCCESS)
+		return (delete_textures(mlx, textures, X_ERROR));
+	if (mlx_image_to_window(mlx, textures->b_king_i, WIDTH * 1, HEIGHT * 1) < 0)
+		return (delete_textures(mlx, textures, X_ERROR));
 	mlx_loop(mlx);
-
-	mlx_delete_image(mlx, img);
-	mlx_delete_texture(texture);
+	delete_textures(mlx, textures, SUCCESS);
 	mlx_terminate(mlx);
 	ft_free_array(map->map_array);
 	return (SUCCESS);
 }
 
-void my_keyhook(mlx_key_data_t keydata, void* param)
-{
-	param = NULL;
-	// If we PRESS the 'J' key, print "Hello".
-	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
-		puts("Hello ");
+//void my_keyhook(mlx_key_data_t keydata, void* param)
+//{
+	//param = NULL;
+	//// If we PRESS the 'J' key, print "Hello".
+	//if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
+		//puts("Hello ");
 
-	// If we RELEASE the 'K' key, print "World".
-	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
-		puts("World");
+	//// If we RELEASE the 'K' key, print "World".
+	//if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
+		//puts("World");
 
-	// If we HOLD the 'L' key, print "!".
-	if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
-		puts("!");
-}
+	//// If we HOLD the 'L' key, print "!".
+	//if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
+		//puts("!");
+//}
 

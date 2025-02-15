@@ -17,7 +17,8 @@ SRCS = so_long.c \
 		args_parse.c \
 		map_frees.c \
 		args_utils.c \
-		init_so_long_utils.c
+		init_so_long_utils.c \
+		init_board.c
 
 DIR_PREFIX = $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS = $(DIR_PREFIX:.c=.o)
