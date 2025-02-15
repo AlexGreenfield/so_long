@@ -1,9 +1,11 @@
-- [ ]Check if map its free before and after call to mlx init
+- [ ] Fix or check MLX leaks
 
-- [ ] Width and height equal to one pixel square * x size and y size
+- [ ] Render floor
+	- [ ] Make renders
+	- [ ] Init Struct
+	- [ ] % of 2 to know if y is power of 2. Print board colors alternative
 
-- [ ] Walls equal to board borders, make 8 version (up, down, left, right and corners);
-
-- [ ] % of 2 to know if y is power of 2. Print board colors alternative
-
-- [ ] Rand for random walls chess pieces, not just towers
+- [ ] Render pieces
+	- [ ] Make renders
+	- [ ] Init Struct
+	- [ ] EXTRA Rand for random walls chess pieces, not just towers

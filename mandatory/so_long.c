@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/15 17:28:10 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/15 17:42:18 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,12 @@ int	init_so_long(t_map *map)
 	if (!textures)
 		return (MALLOC_ERROR);
 	if (init_board(map, mlx, textures) != SUCCESS)
-		return (delete_textures(mlx, textures, X_ERROR));
+	{
+		delete_textures(mlx, textures, SUCCESS);
+		mlx_terminate(mlx);
+		ft_free_array(map->map_array);
+		return (X_ERROR);
+	}
 	//if (mlx_image_to_window(mlx, textures->b_king_i, WIDTH * 1, 
 			//HEIGHT * 1) < 0)
 		//return (delete_textures(textures, X_ERROR));
