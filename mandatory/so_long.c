@@ -6,15 +6,14 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/15 14:24:04 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/15 17:28:10 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	init_so_long(t_map *map);
-void my_keyhook(mlx_key_data_t keydata, void* param);
-
+int		init_so_long(t_map *map);
+void	my_keyhook(mlx_key_data_t keydata, void *param);
 
 int	main(int argc, char **argv)
 {
@@ -41,7 +40,8 @@ int	init_so_long(t_map *map)
 	mlx_t			*mlx;
 	t_textures		*textures;
 
-	mlx = mlx_init((WIDTH * map->x_size), (HEIGHT * map->y_size), "King's Pawns", false);
+	mlx = mlx_init((WIDTH * map->x_size), (HEIGHT * map->y_size),
+			"King's Pawns", false);
 	if (!mlx)
 		return (X_ERROR);
 	textures = malloc (sizeof(t_textures));
@@ -49,8 +49,9 @@ int	init_so_long(t_map *map)
 		return (MALLOC_ERROR);
 	if (init_board(map, mlx, textures) != SUCCESS)
 		return (delete_textures(mlx, textures, X_ERROR));
-	if (mlx_image_to_window(mlx, textures->b_king_i, WIDTH * 1, HEIGHT * 1) < 0)
-		return (delete_textures(mlx, textures, X_ERROR));
+	//if (mlx_image_to_window(mlx, textures->b_king_i, WIDTH * 1, 
+			//HEIGHT * 1) < 0)
+		//return (delete_textures(textures, X_ERROR));
 	mlx_loop(mlx);
 	delete_textures(mlx, textures, SUCCESS);
 	mlx_terminate(mlx);
@@ -73,4 +74,3 @@ int	init_so_long(t_map *map)
 	//if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
 		//puts("!");
 //}
-

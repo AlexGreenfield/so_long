@@ -18,7 +18,10 @@ SRCS = so_long.c \
 		map_frees.c \
 		args_utils.c \
 		init_so_long_utils.c \
-		init_board.c
+		init_board.c \
+		init_borders.c \
+		init_tiles.c \
+		free_board_textures.c \
 
 DIR_PREFIX = $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS = $(DIR_PREFIX:.c=.o)

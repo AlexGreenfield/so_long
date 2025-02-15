@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 19:30:10 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/13 20:00:06 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/15 16:25:39 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,3 @@ void	fill(t_map *map, char **map_array, int y, int x)
 	fill(map, map_array, y + 1, x);
 	fill(map, map_array, y - 1, x);
 }
-
-
