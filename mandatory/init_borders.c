@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:45:39 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/15 17:38:31 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/16 18:17:01 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,124 +14,128 @@
 
 int	init_borders(t_textures *textures)
 {
-	textures->border_top_t = NULL;
-	textures->border_top_i = NULL;
-	textures->border_bottom_t = NULL;
-	textures->border_bottom_i = NULL;
-	textures->border_left_t = NULL;
-	textures->border_left_i = NULL;
-	textures->border_right_t = NULL;
-	textures->border_right_i = NULL;
-	textures->corner_top_left_t = NULL;
-	textures->corner_top_left_i = NULL;
-	textures->corner_top_right_t = NULL;
-	textures->corner_top_right_i = NULL;
-	textures->corner_bottom_left_t = NULL;
-	textures->corner_bottom_left_i = NULL;
-	textures->corner_bottom_right_t = NULL;
-	textures->corner_bottom_right_i = NULL;
+	textures->b_top_t = NULL;
+	textures->b_top_i = NULL;
+	textures->b_bot_t = NULL;
+	textures->b_bot_i = NULL;
+	textures->b_left_t = NULL;
+	textures->b_left_i = NULL;
+	textures->b_right_t = NULL;
+	textures->b_right_i = NULL;
+	textures->c_top_left_t = NULL;
+	textures->c_top_left_i = NULL;
+	textures->c_top_right_t = NULL;
+	textures->c_top_right_i = NULL;
+	textures->c_bot_left_t = NULL;
+	textures->c_bot_left_i = NULL;
+	textures->c_bot_right_t = NULL;
+	textures->c_bot_right_i = NULL;
 	return (SUCCESS);
 }
 
 int	assign_sides(mlx_t *mlx, t_textures *textures)
 {
-	textures->border_top_t = mlx_load_png("./textures/borders/top_32.png");
-	if (!textures->border_top_t)
+	textures->b_top_t = mlx_load_png("./textures/borders/top_32.png");
+	if (!textures->b_top_t)
 		return (X_ERROR);
-	textures->border_top_i = mlx_texture_to_image(mlx, textures->border_top_t);
-	if (!textures->border_top_i)
+	textures->b_top_i = mlx_texture_to_image(mlx, textures->b_top_t);
+	if (!textures->b_top_i)
 		return (X_ERROR);
-	textures->border_bottom_t = mlx_load_png("./textures/borders/bot_32.png");
-	if (!textures->border_bottom_t)
+	textures->b_bot_t = mlx_load_png("./textures/borders/bot_32.png");
+	if (!textures->b_bot_t)
 		return (X_ERROR);
-	textures->border_bottom_i = mlx_texture_to_image(mlx, textures->border_bottom_t);
-	if (!textures->border_bottom_i)
+	textures->b_bot_i = mlx_texture_to_image(mlx, textures->b_bot_t);
+	if (!textures->b_bot_i)
 		return (X_ERROR);
-	textures->border_left_t = mlx_load_png("./textures/borders/left_32.png");
-	if (!textures->border_left_t)
+	textures->b_left_t = mlx_load_png("./textures/borders/left_32.png");
+	if (!textures->b_left_t)
 		return (X_ERROR);
-	textures->border_left_i = mlx_texture_to_image(mlx, textures->border_left_t);
-	if (!textures->border_left_i)
+	textures->b_left_i = mlx_texture_to_image(mlx, textures->b_left_t);
+	if (!textures->b_left_i)
 		return (X_ERROR);
-	textures->border_right_t = mlx_load_png("./textures/borders/right_32.png");
-	if (!textures->border_right_t)
+	textures->b_right_t = mlx_load_png("./textures/borders/right_32.png");
+	if (!textures->b_right_t)
 		return (X_ERROR);
-	textures->border_right_i = mlx_texture_to_image(mlx, textures->border_right_t);
-	if (!textures->border_right_i)
+	textures->b_right_i = mlx_texture_to_image(mlx, textures->b_right_t);
+	if (!textures->b_right_i)
 		return (X_ERROR);
 	return (SUCCESS);
 }
 
 int	assign_corners(mlx_t *mlx, t_textures *textures)
 {
-	textures->corner_top_left_t = mlx_load_png("./textures/borders/t_l_32.png");
-	if (!textures->corner_top_left_t)
+	textures->c_top_left_t = mlx_load_png("./textures/borders/t_l_32.png");
+	if (!textures->c_top_left_t)
 		return (X_ERROR);
-	textures->corner_top_left_i = mlx_texture_to_image(mlx, textures->corner_top_left_t);
-	if (!textures->corner_top_left_i)
+	textures->c_top_left_i = mlx_texture_to_image(mlx, textures->c_top_left_t);
+	if (!textures->c_top_left_i)
 		return (X_ERROR);
-	textures->corner_top_right_t = mlx_load_png("./textures/borders/t_r_32.png");
-	if (!textures->corner_top_right_t)
+	textures->c_top_right_t = mlx_load_png("./textures/borders/t_r_32.png");
+	if (!textures->c_top_right_t)
 		return (X_ERROR);
-	textures->corner_top_right_i = mlx_texture_to_image(mlx, textures->corner_top_right_t);
-	if (!textures->corner_top_right_i)
+	textures->c_top_right_i = mlx_texture_to_image(mlx, textures->c_top_right_t);
+	if (!textures->c_top_right_i)
 		return (X_ERROR);
-	textures->corner_bottom_left_t = mlx_load_png("./textures/borders/b_l_32.png");
-	if (!textures->corner_bottom_left_t)
+	textures->c_bot_left_t = mlx_load_png("./textures/borders/b_l_32.png");
+	if (!textures->c_bot_left_t)
 		return (X_ERROR);
-	textures->corner_bottom_left_i = mlx_texture_to_image(mlx, textures->corner_bottom_left_t);
-	if (!textures->corner_bottom_left_i)
+	textures->c_bot_left_i = mlx_texture_to_image(mlx, textures->c_bot_left_t);
+	if (!textures->c_bot_left_i)
 		return (X_ERROR);
-	textures->corner_bottom_right_t = mlx_load_png("./textures/borders/b_r_32.png");
-	if (!textures->corner_bottom_right_t)
+	textures->c_bot_right_t = mlx_load_png("./textures/borders/b_r_32.png");
+	if (!textures->c_bot_right_t)
 		return (X_ERROR);
-	textures->corner_bottom_right_i = mlx_texture_to_image(mlx, textures->corner_bottom_right_t);
-	if (!textures->corner_bottom_right_i)
+	textures->c_bot_right_i = mlx_texture_to_image(mlx, textures->c_bot_right_t);
+	if (!textures->c_bot_right_i)
 		return (X_ERROR);
 	return (SUCCESS);
+}
+
+mlx_image_t	*select_texture(int y, int x, t_map *map, t_textures *textures)
+{
+	if (y == 0 && x == 0)
+		return (textures->c_top_left_i);
+	if (y == 0 && x == map->x_size - 1)
+		return (textures->c_top_right_i);
+	if (y == map->y_size - 1 && x == 0)
+		return (textures->c_bot_left_i);
+	if (y == map->y_size - 1 && x == map->x_size - 1)
+		return (textures->c_bot_right_i);
+	if (y == 0)
+		return (textures->b_top_i);
+	if (y == map->y_size - 1)
+		return (textures->b_bot_i);
+	if (x == 0)
+		return (textures->b_left_i);
+	if (x == map->x_size - 1)
+		return (textures->b_right_i);
+	return (NULL);
 }
 
 int	render_borders(t_map *map, mlx_t *mlx, t_textures *textures)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	int			check;
+	mlx_image_t	*image;
 
-	y = -1;
-	while (y++ < map->y_size)
+	y = 0;
+	while (y < map->y_size)
 	{
-		x = -1;
-		while (x++ < map->x_size)
+		x = 0;
+		while (x < map->x_size)
 		{
-			if (put_border(y, x, mlx, map, textures) != SUCCESS)
-				return (X_ERROR);
-
+			image = select_texture(y, x, map, textures);
+			if (image)
+			{
+				check = mlx_image_to_window(mlx, image, WIDTH * x, HEIGHT * y);
+				if (check < 0)
+					return (X_ERROR);
+			}
+			x++;
 		}
+		y++;
 	}
 	return (SUCCESS);
 }
 
-int	put_border(int y, int x, mlx_t *mlx, t_map *map, t_textures *textures)
-{
-	int	i;
-
-	i = SUCCESS;
-	if (y == 0 && x == 0)
-		i = mlx_image_to_window(mlx, textures->corner_top_left_i, (WIDTH * x), (HEIGHT * y));
-	else if (y == 0 && x == map->x_size - 1)
-		i = mlx_image_to_window(mlx, textures->corner_top_right_i, (WIDTH * x), (HEIGHT * y));
-	else if (y == map->y_size - 1 && x == 0)
-		i = mlx_image_to_window(mlx, textures->corner_bottom_left_i, (WIDTH * x), (HEIGHT * y));
-	else if (y == map->y_size - 1 && x == map->x_size - 1)
-		i = mlx_image_to_window(mlx, textures->corner_bottom_right_i, (WIDTH * x), (HEIGHT * y));
-	else if (y == 0)
-		i = mlx_image_to_window(mlx, textures->border_top_i, (WIDTH * x), (HEIGHT * y));
-	else if (y == map->y_size - 1)
-		i = mlx_image_to_window(mlx, textures->border_bottom_i, (WIDTH * x), (HEIGHT * y));
-	else if (x == 0)
-		i = mlx_image_to_window(mlx, textures->border_left_i, (WIDTH * x), (HEIGHT * y));
-	else if (x == map->x_size - 1)
-		i = mlx_image_to_window(mlx, textures->border_right_i, (WIDTH * x), (HEIGHT * y));
-	if (i < 0)
-		return (X_ERROR);
-	return (SUCCESS);
-}

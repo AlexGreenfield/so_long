@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/15 17:42:18 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/16 18:12:05 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	init_so_long(t_map *map)
 	t_textures		*textures;
 
 	mlx = mlx_init((WIDTH * map->x_size), (HEIGHT * map->y_size),
-			"King's Pawns", false);
+			"King's Pawn", false);
 	if (!mlx)
 		return (X_ERROR);
 	textures = malloc (sizeof(t_textures));
@@ -49,7 +49,7 @@ int	init_so_long(t_map *map)
 		return (MALLOC_ERROR);
 	if (init_board(map, mlx, textures) != SUCCESS)
 	{
-		delete_textures(mlx, textures, SUCCESS);
+		delete_textures(mlx, textures, X_ERROR);
 		mlx_terminate(mlx);
 		ft_free_array(map->map_array);
 		return (X_ERROR);

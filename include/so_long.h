@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/15 17:35:04 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/16 18:07:13 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,22 @@ typedef struct s_textures
 	mlx_image_t		*b_king_i;
 
 	// Borders
-	mlx_texture_t	*border_top_t;
-	mlx_image_t		*border_top_i;
-	mlx_texture_t	*border_bottom_t;
-	mlx_image_t		*border_bottom_i;
-	mlx_texture_t	*border_left_t;
-	mlx_image_t		*border_left_i;
-	mlx_texture_t	*border_right_t;
-	mlx_image_t		*border_right_i;
-	mlx_texture_t	*corner_top_left_t;
-	mlx_image_t		*corner_top_left_i;
-	mlx_texture_t	*corner_top_right_t;
-	mlx_image_t		*corner_top_right_i;
-	mlx_texture_t	*corner_bottom_left_t;
-	mlx_image_t		*corner_bottom_left_i;
-	mlx_texture_t	*corner_bottom_right_t;
-	mlx_image_t		*corner_bottom_right_i;
+	mlx_texture_t	*b_top_t;
+	mlx_image_t		*b_top_i;
+	mlx_texture_t	*b_bot_t;
+	mlx_image_t		*b_bot_i;
+	mlx_texture_t	*b_left_t;
+	mlx_image_t		*b_left_i;
+	mlx_texture_t	*b_right_t;
+	mlx_image_t		*b_right_i;
+	mlx_texture_t	*c_top_left_t;
+	mlx_image_t		*c_top_left_i;
+	mlx_texture_t	*c_top_right_t;
+	mlx_image_t		*c_top_right_i;
+	mlx_texture_t	*c_bot_left_t;
+	mlx_image_t		*c_bot_left_i;
+	mlx_texture_t	*c_bot_right_t;
+	mlx_image_t		*c_bot_right_i;
 	
 	// Tiles
 	mlx_texture_t	*b_tile_t;
@@ -112,14 +112,17 @@ int		init_walls(t_map *map, mlx_t *mlx, t_textures *textures);
 int		init_borders(t_textures *textures);
 int		assign_sides(mlx_t *mlx, t_textures *textures);
 int		assign_corners(mlx_t *mlx, t_textures *textures);
-int		render_borders(t_map *map, mlx_t *mlx, t_textures *textures);
-int		put_border(int y, int x, mlx_t *mlx, t_map *map, t_textures *textures);
+mlx_image_t	*select_texture(int y, int x, t_map *map, t_textures *textures);
+int	render_borders(t_map *map, mlx_t *mlx, t_textures *textures);
 
 // Init tiles
 void	init_tiles(t_textures *textures);
 
 // Free board textures
 int		delete_textures(mlx_t *mlx, t_textures *textures, int flag);
+int		clean_textures(t_textures *textures);
+int		clean_images(mlx_t *mlx, t_textures *textures);
+
 
 // Init so_long_utils
 
