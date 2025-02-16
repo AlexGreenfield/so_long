@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:45:39 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/16 18:17:01 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/16 19:23:21 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	init_borders(t_textures *textures)
 	textures->b_left_i = NULL;
 	textures->b_right_t = NULL;
 	textures->b_right_i = NULL;
-	textures->c_top_left_t = NULL;
-	textures->c_top_left_i = NULL;
-	textures->c_top_right_t = NULL;
-	textures->c_top_right_i = NULL;
-	textures->c_bot_left_t = NULL;
-	textures->c_bot_left_i = NULL;
-	textures->c_bot_right_t = NULL;
-	textures->c_bot_right_i = NULL;
+	textures->c_top_l_t = NULL;
+	textures->c_top_l_i = NULL;
+	textures->c_top_r_t = NULL;
+	textures->c_top_r_i = NULL;
+	textures->c_bot_l_t = NULL;
+	textures->c_bot_l_i = NULL;
+	textures->c_bot_r_t = NULL;
+	textures->c_bot_r_i = NULL;
 	return (SUCCESS);
 }
 
@@ -64,43 +64,43 @@ int	assign_sides(mlx_t *mlx, t_textures *textures)
 
 int	assign_corners(mlx_t *mlx, t_textures *textures)
 {
-	textures->c_top_left_t = mlx_load_png("./textures/borders/t_l_32.png");
-	if (!textures->c_top_left_t)
+	textures->c_top_l_t = mlx_load_png("./textures/borders/t_l_32.png");
+	if (!textures->c_top_l_t)
 		return (X_ERROR);
-	textures->c_top_left_i = mlx_texture_to_image(mlx, textures->c_top_left_t);
-	if (!textures->c_top_left_i)
+	textures->c_top_l_i = mlx_texture_to_image(mlx, textures->c_top_l_t);
+	if (!textures->c_top_l_i)
 		return (X_ERROR);
-	textures->c_top_right_t = mlx_load_png("./textures/borders/t_r_32.png");
-	if (!textures->c_top_right_t)
+	textures->c_top_r_t = mlx_load_png("./textures/borders/t_r_32.png");
+	if (!textures->c_top_r_t)
 		return (X_ERROR);
-	textures->c_top_right_i = mlx_texture_to_image(mlx, textures->c_top_right_t);
-	if (!textures->c_top_right_i)
+	textures->c_top_r_i = mlx_texture_to_image(mlx, textures->c_top_r_t);
+	if (!textures->c_top_r_i)
 		return (X_ERROR);
-	textures->c_bot_left_t = mlx_load_png("./textures/borders/b_l_32.png");
-	if (!textures->c_bot_left_t)
+	textures->c_bot_l_t = mlx_load_png("./textures/borders/b_l_32.png");
+	if (!textures->c_bot_l_t)
 		return (X_ERROR);
-	textures->c_bot_left_i = mlx_texture_to_image(mlx, textures->c_bot_left_t);
-	if (!textures->c_bot_left_i)
+	textures->c_bot_l_i = mlx_texture_to_image(mlx, textures->c_bot_l_t);
+	if (!textures->c_bot_l_i)
 		return (X_ERROR);
-	textures->c_bot_right_t = mlx_load_png("./textures/borders/b_r_32.png");
-	if (!textures->c_bot_right_t)
+	textures->c_bot_r_t = mlx_load_png("./textures/borders/b_r_32.png");
+	if (!textures->c_bot_r_t)
 		return (X_ERROR);
-	textures->c_bot_right_i = mlx_texture_to_image(mlx, textures->c_bot_right_t);
-	if (!textures->c_bot_right_i)
+	textures->c_bot_r_i = mlx_texture_to_image(mlx, textures->c_bot_r_t);
+	if (!textures->c_bot_r_i)
 		return (X_ERROR);
 	return (SUCCESS);
 }
 
-mlx_image_t	*select_texture(int y, int x, t_map *map, t_textures *textures)
+mlx_image_t	*select_borders(int y, int x, t_map *map, t_textures *textures)
 {
 	if (y == 0 && x == 0)
-		return (textures->c_top_left_i);
+		return (textures->c_top_l_i);
 	if (y == 0 && x == map->x_size - 1)
-		return (textures->c_top_right_i);
+		return (textures->c_top_r_i);
 	if (y == map->y_size - 1 && x == 0)
-		return (textures->c_bot_left_i);
+		return (textures->c_bot_l_i);
 	if (y == map->y_size - 1 && x == map->x_size - 1)
-		return (textures->c_bot_right_i);
+		return (textures->c_bot_r_i);
 	if (y == 0)
 		return (textures->b_top_i);
 	if (y == map->y_size - 1)
@@ -125,7 +125,7 @@ int	render_borders(t_map *map, mlx_t *mlx, t_textures *textures)
 		x = 0;
 		while (x < map->x_size)
 		{
-			image = select_texture(y, x, map, textures);
+			image = select_borders(y, x, map, textures);
 			if (image)
 			{
 				check = mlx_image_to_window(mlx, image, WIDTH * x, HEIGHT * y);

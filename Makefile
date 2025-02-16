@@ -21,6 +21,7 @@ SRCS = so_long.c \
 		init_board.c \
 		init_borders.c \
 		init_tiles.c \
+		init_pieces.c \
 		free_board_textures.c \
 
 DIR_PREFIX = $(addprefix $(SRCS_DIR), $(SRCS))

@@ -540,6 +540,8 @@ int	allocate_map(t_map *map, char *arg)
 
 - Tengo la posición de P, ¿necesito la de E?
 
+- ¿Cómo gestiono el borrado de los coleccionables, pinto encima o elimino el puntero a imagen? ¿Si he hecho copias, como es mi caso?
+
 ## Bibliografía y recursos
 
 ### Páginas web
