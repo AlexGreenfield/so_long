@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 20:03:45 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 22:12:27 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/17 22:35:05 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,28 @@ void	mov_hook(t_global *global, int y, int x)
 	char		next_char;
 	int			next_y;
 	int			next_x;
-	int			current_y;
-	int			current_x;
-	mlx_image_t	*image;
+	//int			current_y;
+	//int			current_x;
+	//mlx_image_t	*image;
 
 	next_y = global->map->p_y + y;
 	next_x = global->map->p_x + x;
-	current_y = global->map->p_y;
-	current_x = global->map->p_x;
-	//global->map->map_array[global->map->p_x][global->map->p_x];
 	next_char = global->map->map_array[next_y][next_x];
-
-	if (next_char == '0')
-	{
-		global->map->map_array[current_y][current_x] = '0';
-		image = select_tile(current_y + 1, current_x + 1, global->textures);
-		mlx_image_to_window(global->mlx, image, WIDTH * current_x, HEIGHT * current_y);
-		global->map->map_array[next_y][next_x] = 'P';
-		global->map->p_y = next_y;
-		global->map->p_x = next_x;
-		mlx_image_to_window(global->mlx,global->textures->b_king_i, WIDTH * next_x, HEIGHT * next_y);
-	}
+	//current_y = global->map->p_y;
+	//current_x = global->map->p_x;
+	////global->map->map_array[global->map->p_x][global->map->p_x];
+;
 	if (next_char == '1')
 		return ;
+	if (next_char == '0')
+		empty_tile(global, y, x);
+	if (next_char == 'C')
+		object_tile(global, y, x);
+	if (next_char == 'E')
+	{
+		if (global->map->c == 0)
+			mlx_close_window(global->mlx);
+		else
+			return ;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 21:52:10 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/17 22:35:51 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,11 @@ int			clean_pieces_textures_images(mlx_t *mlx, t_textures *textures);
 int			clean_pieces_tiles_images(mlx_t *mlx, t_textures *textures);
 
 // Key hooks
-void	key_hooks(mlx_key_data_t keydata, void *param);
-void	mov_hook(t_global *global, int y, int x);
+void		key_hooks(mlx_key_data_t keydata, void *param);
+void		mov_hook(t_global *global, int y, int x);
+
+// Actions
+void		empty_tile(t_global *global, int y, int x);
+void		object_tile(t_global *global, int y, int x);
 
 #endif
