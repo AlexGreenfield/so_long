@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/16 19:22:31 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/17 16:08:33 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ int			render_borders(t_map *map, mlx_t *mlx, t_textures *textures);
 
 // Init tiles
 void		init_tiles(t_textures *textures);
-//int			assign_tiles(mlx_t *mlx, t_textures *textures);
-//mlx_image_t	*select_tiles(int y, int x, t_map *map, t_textures *textures);
-//int			render_borders(t_map *map, mlx_t *mlx, t_textures *textures);
+int			assign_tiles(mlx_t *mlx, t_textures *textures);
+int			render_tiles(t_map *map, mlx_t *mlx, t_textures *textures);
+mlx_image_t	*select_tile(int y, int x, t_textures *textures);
 
 // Init pieces
 void		init_pieces(t_textures *textures);

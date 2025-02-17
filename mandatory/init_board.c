@@ -19,10 +19,10 @@ int	init_board(t_map *map, mlx_t *mlx, t_textures *textures)
 	init_pieces (textures);
 	if (init_walls(map, mlx, textures) != SUCCESS)
 		return (X_ERROR);
-//	if (init_floor(map, mlx, textures) != SUCCESS)
-		//return (X_ERROR);
-	//if (render_pieces(map, mlx, textures) != SUCCESS)
-		//return (X_ERROR);
+	if (init_floor(map, mlx, textures) != SUCCESS)
+		return (X_ERROR);
+	if (init_objects(map, mlx, textures) != SUCCESS)
+		return (X_ERROR);
 	return (SUCCESS);
 }
 
@@ -37,11 +37,20 @@ int	init_walls(t_map *map, mlx_t *mlx, t_textures *textures)
 	return (SUCCESS);
 }
 
-//int	init_floor(t_map *map, mlx_t *mlx, t_textures *textures)
-//{
-	//if (assign_tiles(mlx, textures) != SUCCESS)
-		//return (X_ERROR);
-	//if (render_tiles(map, mlx, textures) != SUCCESS)
-		//return (X_ERROR);
-	//return (SUCCESS);
-//}
+int	init_floor(t_map *map, mlx_t *mlx, t_textures *textures)
+{
+	if (assign_tiles(mlx, textures) != SUCCESS)
+		return (X_ERROR);
+	if (render_tiles(map, mlx, textures) != SUCCESS)
+		return (X_ERROR);
+	return (SUCCESS);
+}
+
+int	init_objects(t_map *map, mlx_t *mlx, t_textures *textures)
+{
+	if (assign_pieces(mlx, textures) != SUCCESS)
+		return (X_ERROR);
+	if (render_pieces(map, mlx, textures) != SUCCESS)
+		return (X_ERROR);
+	return (SUCCESS);
+}
