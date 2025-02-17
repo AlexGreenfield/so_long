@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:41:51 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/16 19:17:25by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/17 17:50:33 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	init_board(t_map *map, mlx_t *mlx, t_textures *textures)
 		return (X_ERROR);
 	if (init_objects(map, mlx, textures) != SUCCESS)
 		return (X_ERROR);
+	mlx_set_icon(mlx, textures->b_king_t); // Do i need to free this somehow?
 	return (SUCCESS);
 }
 

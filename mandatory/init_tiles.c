@@ -6,11 +6,11 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 17:12:47 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 16:15:08 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/17 22:09:56 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
 void	init_tiles(t_textures *textures)
 {

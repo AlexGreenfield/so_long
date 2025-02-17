@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 17:22:04 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 16:16:08 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/17 21:51:52 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	delete_textures(mlx_t *mlx, t_textures *textures, int flag)
 	clean_board_textures(textures);
 	clean_board_images(mlx, textures);
 	clean_pieces_textures_images(mlx, textures);
-	free(textures);
+	if (textures)
+		free(textures);
 	return (flag);
 }
 
@@ -39,10 +40,6 @@ int	clean_board_textures(t_textures *textures)
 		mlx_delete_texture(textures->c_bot_l_t);
 	if (textures->c_bot_r_t)
 		mlx_delete_texture(textures->c_bot_r_t);
-	if (textures->b_tile_t)
-		mlx_delete_texture(textures->b_tile_t);
-	if (textures->w_tile_t)
-		mlx_delete_texture(textures->w_tile_t);
 	return (SUCCESS);
 }
 
@@ -85,6 +82,23 @@ int	clean_pieces_textures_images(mlx_t *mlx, t_textures *textures)
 		mlx_delete_texture(textures->b_tower_t);
 	if (textures->w_pawn_t)
 		mlx_delete_texture(textures->w_pawn_t);
+	if (textures->b_tile_i)
+		mlx_delete_image(mlx, textures->b_tile_i);
+	if (textures->w_tile_i)
+		mlx_delete_image(mlx, textures->w_tile_i);
+	if (textures->b_king_i)
+		mlx_delete_image(mlx, textures->b_king_i);
+	if (textures->w_king_i)
+		mlx_delete_image(mlx, textures->w_king_i);
+	if (textures->b_tower_i)
+		mlx_delete_image(mlx, textures->b_tower_i);
+	if (textures->w_pawn_i)
+		mlx_delete_image(mlx, textures->w_pawn_i);
+	return (SUCCESS);
+}
+
+int	clean_pieces_tiles_images(mlx_t *mlx, t_textures *textures)
+{
 	if (textures->b_tile_i)
 		mlx_delete_image(mlx, textures->b_tile_i);
 	if (textures->w_tile_i)

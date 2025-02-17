@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:45:39 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/16 19:23:21 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/17 16:42:21 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,3 @@ int	render_borders(t_map *map, mlx_t *mlx, t_textures *textures)
 	}
 	return (SUCCESS);
 }
-

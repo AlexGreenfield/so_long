@@ -23,6 +23,7 @@ SRCS = so_long.c \
 		init_tiles.c \
 		init_pieces.c \
 		free_board_textures.c \
+		key_hooks.c \
 
 DIR_PREFIX = $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS = $(DIR_PREFIX:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 16:08:33 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/17 21:52:10 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define HEIGHT 32
 
 // Map struct
+
 typedef struct s_map
 {
 	char	**map_array;
@@ -85,8 +86,16 @@ typedef struct s_textures
 	mlx_image_t		*icon;
 }	t_textures;
 
+typedef struct s_global
+{
+	t_map		*map;
+	t_textures	*textures;
+	mlx_t		*mlx;
+}	t_global;
+
 // Main
 int			init_so_long(t_map *map);
+int			end_game(t_map *map, mlx_t *mlx, t_textures *textures,int flag);
 
 // Parse args
 int			check_ber(char *arg, t_map *map);
@@ -109,6 +118,7 @@ int			free_map_array(t_map *map, int flag);
 int			init_board(t_map *map, mlx_t *mlx, t_textures *textures);
 int			init_walls(t_map *map, mlx_t *mlx, t_textures *textures);
 int			init_floor(t_map *map, mlx_t *mlx, t_textures *textures);
+int			init_objects(t_map *map, mlx_t *mlx, t_textures *textures);
 
 // Init borders
 int			init_borders(t_textures *textures);
@@ -125,14 +135,19 @@ mlx_image_t	*select_tile(int y, int x, t_textures *textures);
 
 // Init pieces
 void		init_pieces(t_textures *textures);
+int			assign_pieces(mlx_t *mlx, t_textures *textures);
+int			render_pieces(t_map *map, mlx_t *mlx, t_textures *textures);
+mlx_image_t	*select_piece(int y, int x, t_map *map, t_textures *textures);
 
 // Free board textures
 int			delete_textures(mlx_t *mlx, t_textures *textures, int flag);
 int			clean_board_textures(t_textures *textures);
 int			clean_board_images(mlx_t *mlx, t_textures *textures);
 int			clean_pieces_textures_images(mlx_t *mlx, t_textures *textures);
-//clean_pieces_textures_images(mlx, textures);
+int			clean_pieces_tiles_images(mlx_t *mlx, t_textures *textures);
 
-// Init so_long_utils
+// Key hooks
+void	key_hooks(mlx_key_data_t keydata, void *param);
+void	mov_hook(t_global *global, int y, int x);
 
 #endif
