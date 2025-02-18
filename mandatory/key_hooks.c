@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 20:03:45 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 22:35:05 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/17 22:38:14 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,10 @@ void	mov_hook(t_global *global, int y, int x)
 	char		next_char;
 	int			next_y;
 	int			next_x;
-	//int			current_y;
-	//int			current_x;
-	//mlx_image_t	*image;
 
 	next_y = global->map->p_y + y;
 	next_x = global->map->p_x + x;
 	next_char = global->map->map_array[next_y][next_x];
-	//current_y = global->map->p_y;
-	//current_x = global->map->p_x;
-	////global->map->map_array[global->map->p_x][global->map->p_x];
-;
 	if (next_char == '1')
 		return ;
 	if (next_char == '0')
