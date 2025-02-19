@@ -1,4 +1,5 @@
 NAME = so_long
+BONUS_NAME = so_long_bonus
 
 # Libft
 LIBFT = libft.a
@@ -11,7 +12,7 @@ HEADERS	:= -I ./include -I $(LIBMLX)/include
 # Compiling libs and flags
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L $(LIBFT_DIR) -lft
 
-# Sources and objects
+# Mandatory sources and objects
 SRCS_DIR = ./mandatory/
 SRCS = so_long.c \
 		args_parse.c \
@@ -29,6 +30,24 @@ SRCS = so_long.c \
 DIR_PREFIX = $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS = $(DIR_PREFIX:.c=.o)
 
+# Bonus sources and objects
+BONUS_DIR = ./bonus/
+BONUS = so_long.c \
+		args_parse.c \
+		map_frees.c \
+		args_utils.c \
+		init_so_long_utils.c \
+		init_board.c \
+		init_borders.c \
+		init_tiles.c \
+		init_pieces.c \
+		free_board_textures.c \
+		key_hooks.c \
+		actions.c \
+
+BONUS_PREFIX = $(addprefix $(BONUS_DIR_DIR), $(BONUS))
+BONUS_OBJS = $(DIR_PREFIX:.c=.o)
+
 # Compilation
 CC = cc
 CFLAGS = -Werror -Wextra -Wall
@@ -41,16 +60,25 @@ BLUE   = \033[0;34m
 RESET  = \033[0m
 
 # Rules
-all: libmlx $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_DIR)/$(LIBFT)
+all: $(NAME)
+
+$(NAME): $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(LIBMLX)/build/libmlx42.a
 	@echo "\n\n$(BLUE)Linking object files and libraries...$(RESET)\n\n"
 	cc $(OBJS) -o $(NAME) -g3 $(LIBS)
 	@echo "\n\n$(GREEN)Build complete!$(RESET)\n\n"
 
-libmlx:
+bonus : $(BONUS_NAME)
+
+$(BONUS_NAME): $(BONUS_OBJS) $(LIBFT_DIR)/$(LIBFT) $(LIBMLX)/build/libmlx42.a
+	@echo "\n\n$(BLUE)Linking bonus object files and libraries...$(RESET)\n\n"
+	cc $(BONUS_OBJS) -o $(BONUS_NAME) -g3 $(LIBS)
+	@echo "\n\n$(GREEN)Build complete!$(RESET)\n\n"
+
+$(LIBMLX)/build/libmlx42.a: $(LIBMLX)/CMakeLists.txt
 	@echo "\n\n$(YELLOW)Compiling MinilibX...$(RESET)\n\n"
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
 
 $(LIBFT_DIR)/$(LIBFT):
 	@echo "\n\n$(YELLOW)Compiling Libft...$(RESET)\n\n"
@@ -62,14 +90,14 @@ $(LIBFT_DIR)/$(LIBFT):
 
 clean:
 	@echo "\n\n$(RED)Cleaning object files...$(RESET)\n\n"
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(BONUS_OBJS)
 	@rm -rf $(LIBMLX)/build
 	@cd $(LIBFT_DIR) && make clean
 
 
 fclean: clean
 	@echo "\n\n$(RED)Cleaning all...$(RESET)\n\n"
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(BONUS_NAME)
 	@cd $(LIBFT_DIR) && make fclean
 
 re: fclean all
