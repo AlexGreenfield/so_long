@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 19:30:10 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 19:12:38 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:37:50 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	fill(t_map *map, char **map_array, int y, int x)
 {
 	if (x < 0 || y < 0 || x >= map->x_size || y >= map->y_size)
 		return ;
-	if (map_array[y][x] == '1' || map_array[y][x] == 'A')
+	if (map_array[y][x] == '1')
 		return ;
 	if (map_array[y][x] == 'C')
 		map->fill_c++;

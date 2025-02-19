@@ -45,8 +45,8 @@ BONUS = so_long.c \
 		key_hooks.c \
 		actions.c \
 
-BONUS_PREFIX = $(addprefix $(BONUS_DIR_DIR), $(BONUS))
-BONUS_OBJS = $(DIR_PREFIX:.c=.o)
+BONUS_PREFIX = $(addprefix $(BONUS_DIR), $(BONUS))
+BONUS_OBJS = $(BONUS_PREFIX:.c=.o)
 
 # Compilation
 CC = cc
@@ -97,7 +97,7 @@ clean:
 
 fclean: clean
 	@echo "\n\n$(RED)Cleaning all...$(RESET)\n\n"
-	@rm -f $(NAME) $(BONUS_NAME)
+	@rm -f $(NAME) $(BONUS)
 	@cd $(LIBFT_DIR) && make fclean
 
 re: fclean all

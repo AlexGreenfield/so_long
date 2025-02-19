@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 20:03:45 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 18:47:37 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 19:54:12 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	key_hooks(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(global->mlx);
 }
-
 
 void	mov_hook(t_global *global, int y, int x)
 {

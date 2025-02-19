@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:37:37 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/13 20:18:04 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:17:42 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int			ft_issign(int c);
 char		*ft_locate_next_c(char const *s, char c);
 
 /*Part 7 - so_long*/
-char	**ft_arraydup(char **argv);
-void	ft_free_array(char **array);
+char		**ft_arraydup(char **argv);
+void		ft_free_array(char **array);
 
 #endif
