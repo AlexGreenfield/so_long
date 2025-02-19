@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_frees.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:51:26 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/16 18:13:25 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/19 18:24:16 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	free_main_map(t_map *map, int flag)
 {
 	free (map);
 	if (flag == X_ERROR)
-		write (2, "X Error\n", 9);
+		write (2, "Error\nBad call to X\n", 21);
 	if (flag != SUCCESS)
-		write (2, "Error\n", 7);
+		write (2, "Error\nBad Map\n", 15);
 	return (flag);
 }
 

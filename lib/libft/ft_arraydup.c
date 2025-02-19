@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 19:35:50 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/13 20:17:41 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:19:56 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void	ft_free_array(char **array)
 
 	i = 0;
 	while (array[i])
-		free(array[i++]);
+	{
+		free(array[i]);
+		i++;
+	}
 	free(array);
 }

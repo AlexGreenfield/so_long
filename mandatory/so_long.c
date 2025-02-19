@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 21:16:51 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/19 18:29:02 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	init_so_long(t_map *map)
 	global->mlx = mlx;
 	mlx_key_hook(mlx, key_hooks, global);
 	mlx_loop(mlx);
+	free(global);
+	global = NULL;
 	return (end_game(map, mlx, textures, SUCCESS));
 }
 

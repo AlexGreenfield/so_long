@@ -2,6 +2,8 @@
 
 valgrind --track-fds=all ./so_long map1.ber
 
+valgrind --track-fds=all --track-origins=yes --leak-check=full ./so_long maps/map2.ber
+
 ## Impresion mapa ya parseado
 
 printf("\nmap_og\n");

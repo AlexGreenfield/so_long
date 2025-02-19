@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 22:35:51 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/19 18:06:36 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ typedef struct s_textures
 	mlx_image_t		*b_tile_i;
 	mlx_texture_t	*w_tile_t;
 	mlx_image_t		*w_tile_i;
-	// Icon
-	mlx_image_t		*icon;
 }	t_textures;
 
 typedef struct s_global
