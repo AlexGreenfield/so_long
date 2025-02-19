@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:41:51 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 18:05:27 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:03:21 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 int	init_board(t_map *map, mlx_t *mlx, t_textures *textures)
 {

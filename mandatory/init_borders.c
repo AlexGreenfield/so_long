@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_borders.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:45:39 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 16:42:21 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/19 21:03:19 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 int	init_borders(t_textures *textures)
 {

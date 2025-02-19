@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 22:20:50 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 20:05:40 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:48:46 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	empty_tile(t_global *global, int y, int x)
 {

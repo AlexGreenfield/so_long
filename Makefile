@@ -18,7 +18,6 @@ SRCS = so_long.c \
 		args_parse.c \
 		map_frees.c \
 		args_utils.c \
-		init_so_long_utils.c \
 		init_board.c \
 		init_borders.c \
 		init_tiles.c \
@@ -36,7 +35,6 @@ BONUS = so_long.c \
 		args_parse.c \
 		map_frees.c \
 		args_utils.c \
-		init_so_long_utils.c \
 		init_board.c \
 		init_borders.c \
 		init_tiles.c \
@@ -103,3 +101,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+

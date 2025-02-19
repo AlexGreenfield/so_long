@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_board_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 17:22:04 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 21:51:52 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/19 21:38:56 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long_bonus.h"
 
 int	delete_textures(mlx_t *mlx, t_textures *textures, int flag)
 {
@@ -65,6 +65,10 @@ int	clean_board_images(mlx_t *mlx, t_textures *textures)
 		mlx_delete_image(mlx, textures->b_tile_i);
 	if (textures->w_tile_i)
 		mlx_delete_image(mlx, textures->w_tile_i);
+	if (textures->w_horse_t)
+		mlx_delete_texture(textures->w_horse_t);
+	if (textures->w_horse_i)
+		mlx_delete_image(mlx, textures->w_horse_i);
 	return (SUCCESS);
 }
 

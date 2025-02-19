@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 20:19:41 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:59:58 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ typedef struct s_textures
 	mlx_image_t		*b_tile_i;
 	mlx_texture_t	*w_tile_t;
 	mlx_image_t		*w_tile_i;
+	// Bonus pieces
+	mlx_texture_t	*w_horse_t;
+	mlx_image_t		*w_horse_i;
 }	t_textures;
 
 typedef struct s_global
@@ -134,6 +137,7 @@ mlx_image_t	*select_tile(int y, int x, t_textures *textures);
 // Init pieces
 void		init_pieces(t_textures *textures);
 int			assign_pieces(mlx_t *mlx, t_textures *textures);
+int			assign_bonus_pieces(mlx_t *mlx, t_textures *textures);
 int			render_pieces(t_map *map, mlx_t *mlx, t_textures *textures);
 mlx_image_t	*select_piece(int y, int x, t_map *map, t_textures *textures);
 

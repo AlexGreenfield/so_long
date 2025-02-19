@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_pieces.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:41:48 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 17:51:55 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/19 21:14:51 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	init_pieces(t_textures *textures)
 {
@@ -22,6 +22,8 @@ void	init_pieces(t_textures *textures)
 	textures->b_tower_i = NULL;
 	textures->w_pawn_t = NULL;
 	textures->w_pawn_i = NULL;
+	textures->w_horse_t = NULL;
+	textures->w_horse_i = NULL;
 }
 
 int	assign_pieces(mlx_t *mlx, t_textures *textures)
@@ -49,6 +51,17 @@ int	assign_pieces(mlx_t *mlx, t_textures *textures)
 		return (X_ERROR);
 	textures->w_pawn_i = mlx_texture_to_image(mlx, textures->w_pawn_t);
 	if (!textures->w_pawn_i)
+		return (X_ERROR);
+	return (SUCCESS);
+}
+
+int	assign_bonus_pieces(mlx_t *mlx, t_textures *textures)
+{
+	textures->w_horse_t = mlx_load_png("./textures/pieces/w_horse_32.png");
+	if (!textures->w_horse_t)
+		return (X_ERROR);
+	textures->w_horse_i = mlx_texture_to_image(mlx, textures->w_horse_t);
+	if (!textures->w_horse_i)
 		return (X_ERROR);
 	return (SUCCESS);
 }
@@ -90,5 +103,7 @@ mlx_image_t	*select_piece(int y, int x, t_map *map, t_textures *textures)
 		return (textures->b_king_i);
 	if (map->map_array[y][x] == '1')
 		return (textures->b_tower_i);
+	if (map->map_array[y][x] == 'A')
+		return (textures->w_horse_i);
 	return (NULL);
 }

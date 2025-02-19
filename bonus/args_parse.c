@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:28:30 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/19 18:33:08 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:08:13 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 int	allocate_map(t_map *map, char *arg);
 int	bad_walls(t_map *map);

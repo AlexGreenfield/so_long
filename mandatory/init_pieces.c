@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_pieces.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:41:48 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 17:51:55 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/19 21:03:23 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	init_pieces(t_textures *textures)
 {

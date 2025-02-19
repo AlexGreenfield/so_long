@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 20:03:45 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 19:54:12 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:08:32 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	key_hooks(mlx_key_data_t keydata, void *param)
 {

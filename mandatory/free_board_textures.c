@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_board_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 17:22:04 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 21:51:52 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/19 21:02:58 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 int	delete_textures(mlx_t *mlx, t_textures *textures, int flag)
 {

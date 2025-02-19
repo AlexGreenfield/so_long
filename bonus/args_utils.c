@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 19:30:10 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 20:37:50 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:08:30 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 int		bad_ber(char *arg);
 int		bad_size(t_map *map, char *arg);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_tiles.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 17:12:47 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/17 22:09:56 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/19 21:08:05 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	init_tiles(t_textures *textures)
 {

@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 20:03:45 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 19:54:12 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:16:05 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	key_hooks(mlx_key_data_t keydata, void *param)
 {
@@ -62,4 +62,6 @@ void	mov_hook(t_global *global, int y, int x)
 		else
 			return ;
 	}
+	if (next_char == 'A')
+		mlx_close_window(global->mlx);
 }

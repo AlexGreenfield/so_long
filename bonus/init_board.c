@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:41:51 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 18:05:27 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:18:33 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long_bonus.h"
 
 int	init_board(t_map *map, mlx_t *mlx, t_textures *textures)
 {
@@ -50,6 +50,8 @@ int	init_floor(t_map *map, mlx_t *mlx, t_textures *textures)
 int	init_objects(t_map *map, mlx_t *mlx, t_textures *textures)
 {
 	if (assign_pieces(mlx, textures) != SUCCESS)
+		return (X_ERROR);
+	if (assign_bonus_pieces(mlx, textures) != SUCCESS)
 		return (X_ERROR);
 	if (render_pieces(map, mlx, textures) != SUCCESS)
 		return (X_ERROR);
