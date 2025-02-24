@@ -43,6 +43,7 @@ BONUS = so_long.c \
 		key_hooks.c \
 		actions.c \
 		bonus_ft.c \
+		scale.c \
 
 BONUS_PREFIX = $(addprefix $(BONUS_DIR), $(BONUS))
 BONUS_OBJS = $(BONUS_PREFIX:.c=.o)

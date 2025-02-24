@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/22 15:26:58 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/24 21:27:05 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int	main(int argc, char **argv)
 			return (MALLOC_ERROR);
 		if (check_ber(argv[1], map) != SUCCESS)
 			return (free_main_map(map, FILE_ERROR));
+		if (get_window_size(map) != SUCCESS)
+		{
+			ft_printf("bad window\n");
+			return (free_main_map(map, FILE_ERROR));
+		}
 		if (init_so_long(map) != SUCCESS)
 			return (free_main_map(map, X_ERROR));
 		return (free_main_map(map, SUCCESS));
@@ -40,9 +45,12 @@ int	init_so_long(t_map *map)
 	mlx_t			*mlx;
 	t_textures		*textures;
 	t_global		*global;
+	int				scale;
 
-	mlx = mlx_init((WIDTH * map->x_size), (HEIGHT * map->y_size),
-			"King's Pawn", false);
+	scale = map->int_scale;
+	ft_printf("Scale is %d\n", scale);
+	mlx = mlx_init(((WIDTH * scale) * map->x_size),
+			((HEIGHT * scale) * map->y_size), "King's Pawn", false);
 	if (!mlx)
 		return (X_ERROR);
 	textures = malloc (sizeof(t_textures));

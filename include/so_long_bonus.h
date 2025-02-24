@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/24 20:30:05 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/24 21:35:59 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_map
 	int		p;
 	int		p_x;
 	int		p_y;
+	int		int_scale;
 }	t_map;
 
 // Textures struct
@@ -164,5 +165,13 @@ void	ft_printf_move(t_global *global);
 void		idle(void *param);
 void		disable_object(t_global *global);
 int			my_abs(int n);
+int			get_window_size(t_map *map);
+
+// Resize bonus
+void	resize_borders(t_textures *textures, int scale);
+void	resize_pieces(t_textures *textures, int scale);
+void	resize_tiles(t_textures *textures, int scale);
+
+
 
 #endif

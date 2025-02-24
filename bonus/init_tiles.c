@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_tiles.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 17:12:47 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 21:08:05 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:43:59 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,24 @@ int	render_tiles(t_map *map, mlx_t *mlx, t_textures *textures)
 	int			y;
 	int			check;
 	mlx_image_t	*image;
+	int			s;
 
-	y = 1;
-	while (y < map->y_size - 1)
+	s = map->int_scale;
+	y = 0;
+	while (++y < map->y_size - 1)
 	{
-		x = 1;
-		while (x < map->x_size - 1)
+		x = 0;
+		while (++x < map->x_size - 1)
 		{
 			image = select_tile(y, x, textures);
 			if (image)
 			{
-				check = mlx_image_to_window(mlx, image, WIDTH * x, HEIGHT * y);
+				check = mlx_image_to_window(mlx, image, (WIDTH * s) * x,
+						(HEIGHT * s) * y);
 				if (check < 0)
 					return (X_ERROR);
 			}
-			x++;
 		}
-		y++;
 	}
 	return (SUCCESS);
 }

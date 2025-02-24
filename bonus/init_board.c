@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_board.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:41:51 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 21:18:33 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:35:16 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int	init_board(t_map *map, mlx_t *mlx, t_textures *textures)
 		return (X_ERROR);
 	if (init_objects(map, mlx, textures) != SUCCESS)
 		return (X_ERROR);
+	if (map->int_scale > 1)
+	{
+		resize_borders(textures, map->int_scale);
+		resize_tiles(textures, map->int_scale);
+		resize_pieces(textures, map->int_scale);
+	}
 	mlx_set_icon(mlx, textures->b_king_t);
 	return (SUCCESS);
 }

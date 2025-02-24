@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 22:20:50 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/24 20:40:57 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/24 22:08:25 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,20 @@ void	empty_tile(t_global *global, int y, int x)
 	ft_printf_move(global);
 }
 
+// Maybe i have to do it globally for freeing at the end, leaks
 void	ft_printf_move(t_global *global)
 {
 	static int			i;
 	char				*string;
+	int					s;
 	static mlx_image_t	*counter;
 
+	s = global->map->int_scale;
 	i++;
 	if (counter)
 		mlx_delete_image(global->mlx, counter);
 	string = ft_itoa(i);
-	counter = mlx_put_string(global->mlx, string, 16, 0);
+	counter = mlx_put_string(global->mlx, string, 16 * s, 1 * s);
+	free(string);
 	ft_printf("%d\n", i);
 }

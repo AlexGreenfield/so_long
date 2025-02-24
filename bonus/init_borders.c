@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_borders.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:45:39 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 21:08:21 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:41:32 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,24 +117,25 @@ int	render_borders(t_map *map, mlx_t *mlx, t_textures *textures)
 	int			x;
 	int			y;
 	int			check;
+	int			s;
 	mlx_image_t	*image;
 
-	y = 0;
-	while (y < map->y_size)
+	s = map->int_scale;
+	y = -1;
+	while (++y < map->y_size)
 	{
-		x = 0;
-		while (x < map->x_size)
+		x = -1;
+		while (++x < map->x_size)
 		{
 			image = select_borders(y, x, map, textures);
 			if (image)
 			{
-				check = mlx_image_to_window(mlx, image, WIDTH * x, HEIGHT * y);
+				check = mlx_image_to_window(mlx, image, (WIDTH * s)
+						* x, (HEIGHT * s) * y);
 				if (check < 0)
 					return (X_ERROR);
 			}
-			x++;
 		}
-		y++;
 	}
 	return (SUCCESS);
 }
