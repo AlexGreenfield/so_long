@@ -42,6 +42,7 @@ BONUS = so_long.c \
 		free_board_textures.c \
 		key_hooks.c \
 		actions.c \
+		bonus_ft.c \
 
 BONUS_PREFIX = $(addprefix $(BONUS_DIR), $(BONUS))
 BONUS_OBJS = $(BONUS_PREFIX:.c=.o)

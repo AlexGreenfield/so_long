@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 21:04:32 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:26:58 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	init_so_long(t_map *map)
 	global->textures = textures;
 	global->mlx = mlx;
 	mlx_key_hook(mlx, key_hooks, global);
+	mlx_loop_hook(mlx, idle, global);
 	mlx_loop(mlx);
 	free(global);
 	global = NULL;

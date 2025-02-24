@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pieces.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:41:48 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 21:14:51 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:16:48 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ int	assign_bonus_pieces(mlx_t *mlx, t_textures *textures)
 	textures->w_horse_i = mlx_texture_to_image(mlx, textures->w_horse_t);
 	if (!textures->w_horse_i)
 		return (X_ERROR);
+	textures->b_kingb_t = mlx_load_png("./textures/pieces/b_kingb_32.png");
+	if (!textures->b_kingb_t)
+		return (X_ERROR);
+	textures->b_kingb_i = mlx_texture_to_image(mlx, textures->b_kingb_t);
+	if (!textures->b_kingb_i)
+		return (X_ERROR);
 	return (SUCCESS);
 }
 
@@ -73,11 +79,11 @@ int	render_pieces(t_map *map, mlx_t *mlx, t_textures *textures)
 	int			check;
 	mlx_image_t	*image;
 
-	y = 1;
-	while (y < map->y_size - 1)
+	y = 0;
+	while (++y < map->y_size - 1)
 	{
-		x = 1;
-		while (x < map->x_size - 1)
+		x = 0;
+		while (++x < map->x_size - 1)
 		{
 			image = select_piece(y, x, map, textures);
 			if (image)
@@ -86,9 +92,10 @@ int	render_pieces(t_map *map, mlx_t *mlx, t_textures *textures)
 				if (check < 0)
 					return (X_ERROR);
 			}
-			x++;
+			if (image == textures->b_king_i)
+				mlx_image_to_window(mlx, textures->b_kingb_i,
+					WIDTH * x, HEIGHT * y);
 		}
-		y++;
 	}
 	return (SUCCESS);
 }

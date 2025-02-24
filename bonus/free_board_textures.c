@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_board_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 17:22:04 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 21:38:56 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:21:11 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	delete_textures(mlx_t *mlx, t_textures *textures, int flag)
 	clean_board_textures(textures);
 	clean_board_images(mlx, textures);
 	clean_pieces_textures_images(mlx, textures);
+	clean_bonus_pieces(mlx, textures);
 	if (textures)
 		free(textures);
 	return (flag);
@@ -65,10 +66,6 @@ int	clean_board_images(mlx_t *mlx, t_textures *textures)
 		mlx_delete_image(mlx, textures->b_tile_i);
 	if (textures->w_tile_i)
 		mlx_delete_image(mlx, textures->w_tile_i);
-	if (textures->w_horse_t)
-		mlx_delete_texture(textures->w_horse_t);
-	if (textures->w_horse_i)
-		mlx_delete_image(mlx, textures->w_horse_i);
 	return (SUCCESS);
 }
 
@@ -101,19 +98,15 @@ int	clean_pieces_textures_images(mlx_t *mlx, t_textures *textures)
 	return (SUCCESS);
 }
 
-int	clean_pieces_tiles_images(mlx_t *mlx, t_textures *textures)
+int	clean_bonus_pieces(mlx_t *mlx, t_textures *textures)
 {
-	if (textures->b_tile_i)
-		mlx_delete_image(mlx, textures->b_tile_i);
-	if (textures->w_tile_i)
-		mlx_delete_image(mlx, textures->w_tile_i);
-	if (textures->b_king_i)
-		mlx_delete_image(mlx, textures->b_king_i);
-	if (textures->w_king_i)
-		mlx_delete_image(mlx, textures->w_king_i);
-	if (textures->b_tower_i)
-		mlx_delete_image(mlx, textures->b_tower_i);
-	if (textures->w_pawn_i)
-		mlx_delete_image(mlx, textures->w_pawn_i);
+	if (textures->w_horse_t)
+		mlx_delete_texture(textures->w_horse_t);
+	if (textures->w_horse_i)
+		mlx_delete_image(mlx, textures->w_horse_i);
+	if (textures->b_kingb_t)
+		mlx_delete_texture(textures->b_kingb_t);
+	if (textures->b_kingb_i)
+		mlx_delete_image(mlx, textures->b_kingb_i);
 	return (SUCCESS);
 }

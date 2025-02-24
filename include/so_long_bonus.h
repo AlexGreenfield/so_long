@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 20:59:58 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:30:05 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ typedef struct s_textures
 	// Bonus pieces
 	mlx_texture_t	*w_horse_t;
 	mlx_image_t		*w_horse_i;
+	mlx_texture_t	*b_kingb_t;
+	mlx_image_t		*b_kingb_i;
 }	t_textures;
 
 typedef struct s_global
@@ -146,7 +148,8 @@ int			delete_textures(mlx_t *mlx, t_textures *textures, int flag);
 int			clean_board_textures(t_textures *textures);
 int			clean_board_images(mlx_t *mlx, t_textures *textures);
 int			clean_pieces_textures_images(mlx_t *mlx, t_textures *textures);
-int			clean_pieces_tiles_images(mlx_t *mlx, t_textures *textures);
+int			clean_bonus_pieces(mlx_t *mlx, t_textures *textures);
+
 
 // Key hooks
 void		key_hooks(mlx_key_data_t keydata, void *param);
@@ -154,6 +157,12 @@ void		mov_hook(t_global *global, int y, int x);
 
 // Actions
 void		empty_tile(t_global *global, int y, int x);
-void		ft_printf_move(void);
+void	ft_printf_move(t_global *global);
+
+
+// Bonus ft 
+void		idle(void *param);
+void		disable_object(t_global *global);
+int			my_abs(int n);
 
 #endif
