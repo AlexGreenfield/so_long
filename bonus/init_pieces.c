@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pieces.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:41:48 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/24 21:51:01 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/25 17:12:23 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	render_pieces(t_map *map, mlx_t *mlx, t_textures *textures)
 {
 	int			x;
 	int			y;
-	int			check;
 	mlx_image_t	*image;
 	int			s;
 
@@ -89,10 +88,8 @@ int	render_pieces(t_map *map, mlx_t *mlx, t_textures *textures)
 		{
 			image = select_piece(y, x, map, textures);
 			if (image)
-				check = mlx_image_to_window(mlx, image,
-						(WIDTH * s) * x, (HEIGHT * s) * y);
-			if (check < 0)
-				return (X_ERROR);
+				mlx_image_to_window(mlx, image,
+					(WIDTH * s) * x, (HEIGHT * s) * y);
 			if (image == textures->b_king_i)
 				mlx_image_to_window(mlx, textures->b_kingb_i,
 					(WIDTH * s) * x, (HEIGHT * s) * y);

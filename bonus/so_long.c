@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/24 21:27:05 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/25 17:19:49 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	init_so_long(t_map *map)
 	int				scale;
 
 	scale = map->int_scale;
-	ft_printf("Scale is %d\n", scale);
 	mlx = mlx_init(((WIDTH * scale) * map->x_size),
 			((HEIGHT * scale) * map->y_size), "King's Pawn", false);
 	if (!mlx)
@@ -58,12 +57,9 @@ int	init_so_long(t_map *map)
 		return (MALLOC_ERROR);
 	if (init_board(map, mlx, textures) != SUCCESS)
 		return (end_game(map, mlx, textures, X_ERROR));
-	global = malloc (sizeof(t_global));
+	global = init_global(map, mlx, textures);
 	if (!global)
 		return (end_game(map, mlx, textures, X_ERROR));
-	global->map = map;
-	global->textures = textures;
-	global->mlx = mlx;
 	mlx_key_hook(mlx, key_hooks, global);
 	mlx_loop_hook(mlx, idle, global);
 	mlx_loop(mlx);
@@ -78,4 +74,17 @@ int	end_game(t_map *map, mlx_t *mlx, t_textures *textures, int flag)
 	mlx_terminate(mlx);
 	ft_free_array(map->map_array);
 	return (flag);
+}
+
+t_global	*init_global(t_map *map, mlx_t *mlx, t_textures *textures)
+{
+	t_global	*global;
+
+	global = malloc (sizeof(t_global));
+	if (!global)
+		return (NULL);
+	global->map = map;
+	global->textures = textures;
+	global->mlx = mlx;
+	return (global);
 }

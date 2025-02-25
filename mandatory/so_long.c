@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/19 18:29:02 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:20:20 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	init_so_long(t_map *map)
 	t_global		*global;
 
 	mlx = mlx_init((WIDTH * map->x_size), (HEIGHT * map->y_size),
-			"King's Pawn", false);
+			"So_Long", false);
 	if (!mlx)
 		return (X_ERROR);
 	textures = malloc (sizeof(t_textures));

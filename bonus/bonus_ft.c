@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_ft.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:13:52 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/24 22:08:04 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/25 17:15:09 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,10 @@ void	disable_object(t_global *global)
 		if (my_abs(pawn_x - king_x) <= WIDTH * global->map->int_scale)
 		{
 			if (my_abs(pawn_y - king_y) <= HEIGHT * global->map->int_scale)
-			{
-				ft_printf("Disabling pawn at (%d, %d), King at (%d, %d)\n",
-					pawn_x, pawn_y, king_x, king_y);
 				global->textures->w_pawn_i->instances[i].enabled = false;
-			}
 		}
 		i++;
 	}
-	ft_printf("Pawn at (%d, %d), King at (%d, %d)\n",
-		pawn_x, pawn_y, king_x, king_y);
-	ft_printf("No matching pawn found within ±32 range.\n");
 }
 
 int	get_window_size(t_map *map)
@@ -96,14 +89,11 @@ int	get_window_size(t_map *map)
 	mlx_get_monitor_size(0, &width, &height);
 	mlx_terminate(temp);
 	mlx_set_setting(MLX_HEADLESS, false);
-	ft_printf("In ft, width is %d\n", width);
-	ft_printf("In ft, height is %d\n", height);
 	width_factor = width / (map->x_size * WIDTH);
 	height_factor = height / (map->y_size * HEIGHT);
 	if (width_factor < height_factor)
 		map->int_scale = width_factor;
 	else
 		map->int_scale = height_factor;
-	ft_printf("In ft, scale is %d\n", map->int_scale);
 	return (SUCCESS);
 }

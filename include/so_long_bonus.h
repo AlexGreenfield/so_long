@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/24 21:35:59 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/25 17:18:49 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ typedef struct s_global
 // Main
 int			init_so_long(t_map *map);
 int			end_game(t_map *map, mlx_t *mlx, t_textures *textures, int flag);
+t_global	*init_global(t_map *map, mlx_t *mlx, t_textures *t_textures);
+
 
 // Parse args
 int			check_ber(char *arg, t_map *map);
@@ -161,7 +163,7 @@ void		empty_tile(t_global *global, int y, int x);
 void	ft_printf_move(t_global *global);
 
 
-// Bonus ft 
+// Bonus ft
 void		idle(void *param);
 void		disable_object(t_global *global);
 int			my_abs(int n);
