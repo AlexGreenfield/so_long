@@ -97,7 +97,7 @@ clean:
 
 fclean: clean
 	@echo "\n\n$(RED)Cleaning all...$(RESET)\n\n"
-	@rm -f $(NAME) $(BONUS)
+	@rm -f $(NAME) $(BONUS_NAME)
 	@cd $(LIBFT_DIR) && make fclean
 
 re: fclean all

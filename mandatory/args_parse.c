@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:28:30 by acastrov          #+#    #+#             */
-/*   Updated: 2025/02/25 17:21:35 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:10:25 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	check_ber(char *arg, t_map *map)
 		return (FILE_ERROR);
 	if (bad_size(map, arg) || map->y_size < 3 || map->x_size < 3)
 		return (FILE_ERROR);
-	if (map->y_size > 124 || map->x_size > 67)
+	ft_printf("y is %d and x is %d\n", map->y_size, map->x_size);
+	if (map->y_size > 65 || map->x_size > 120)
 		return (FILE_ERROR);
 	if (allocate_map(map, arg) != SUCCESS)
 		return (FILE_ERROR);
