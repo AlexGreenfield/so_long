@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
+/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 22:20:50 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/24 22:08:25 by alejandro        ###   ########.fr       */
+/*   Updated: 2025/02/26 18:51:54 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	empty_tile(t_global *global, int y, int x)
 	ft_printf_move(global);
 }
 
-// Maybe i have to do it globally for freeing at the end, leaks
 void	ft_printf_move(t_global *global)
 {
 	static int			i;
@@ -47,6 +46,8 @@ void	ft_printf_move(t_global *global)
 		mlx_delete_image(global->mlx, counter);
 	string = ft_itoa(i);
 	counter = mlx_put_string(global->mlx, string, 16 * s, 1 * s);
+	mlx_resize_image(counter, WIDTH * global->map->int_scale / 2,
+		HEIGHT * global->map->int_scale / 2);
 	free(string);
 	ft_printf("%d\n", i);
 }

@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/25 17:19:49 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/26 19:44:53 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ int	main(int argc, char **argv)
 		if (check_ber(argv[1], map) != SUCCESS)
 			return (free_main_map(map, FILE_ERROR));
 		if (get_window_size(map) != SUCCESS)
-		{
-			ft_printf("bad window\n");
 			return (free_main_map(map, FILE_ERROR));
-		}
 		if (init_so_long(map) != SUCCESS)
 			return (free_main_map(map, X_ERROR));
 		return (free_main_map(map, SUCCESS));

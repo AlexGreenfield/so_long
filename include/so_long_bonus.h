@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:27:06 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/25 17:18:49 by acastrov         ###   ########.fr       */
+/*   Updated: 2025/02/26 19:04:14 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int			init_so_long(t_map *map);
 int			end_game(t_map *map, mlx_t *mlx, t_textures *textures, int flag);
 t_global	*init_global(t_map *map, mlx_t *mlx, t_textures *t_textures);
 
-
 // Parse args
 int			check_ber(char *arg, t_map *map);
 int			allocate_map(t_map *map, char *arg);
@@ -153,15 +152,13 @@ int			clean_board_images(mlx_t *mlx, t_textures *textures);
 int			clean_pieces_textures_images(mlx_t *mlx, t_textures *textures);
 int			clean_bonus_pieces(mlx_t *mlx, t_textures *textures);
 
-
 // Key hooks
 void		key_hooks(mlx_key_data_t keydata, void *param);
 void		mov_hook(t_global *global, int y, int x);
 
 // Actions
 void		empty_tile(t_global *global, int y, int x);
-void	ft_printf_move(t_global *global);
-
+void		ft_printf_move(t_global *global);
 
 // Bonus ft
 void		idle(void *param);
@@ -170,10 +167,8 @@ int			my_abs(int n);
 int			get_window_size(t_map *map);
 
 // Resize bonus
-void	resize_borders(t_textures *textures, int scale);
-void	resize_pieces(t_textures *textures, int scale);
-void	resize_tiles(t_textures *textures, int scale);
-
-
+void		resize_borders(t_textures *textures, int scale);
+void		resize_pieces(t_textures *textures, int scale);
+void		resize_tiles(t_textures *textures, int scale);
 
 #endif
