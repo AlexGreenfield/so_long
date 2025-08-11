@@ -1,6 +1,5 @@
 # so_long
 
-
 - [Introducción]
 - [Nuevos conceptos]
 - [Librería Minilibx](#libería-minilibx)
@@ -45,9 +44,13 @@
 
 ### Qué es y cómo instalarla
 
-Una de los puntos clave de este círculo es aprender a usar librerías externas. En este ocasión vamos a manejarnos con la [MinilibX](https://github.com/42Paris/minilibx-linux), una versión minimalista del sistema de ventanas [X](https://en.wikipedia.org/wiki/X_Window_System) de Linux.
+Una de los puntos clave de este proyecto es aprender a usar librerías externas. En concreto, vamos a manejar una librería llamada [MinilibX](https://github.com/42Paris/minilibx-linux), una versión minimalista del sistema de ventanas [X](https://en.wikipedia.org/wiki/X_Window_System) de Linux.
 
-Esta librería es la que nos va a permitir crear nuevas2 ventanas en nuestro escritorio, dibujar en ellas nuestros pixeles y manejar el input del usuario. Pero para ello, primero debemos incluirla en nuestro proyecto. Aunque puede parecer lioso, en realidad es muy fácil.
+Esta librería es la que nos va a permitir crear nuevas ventanas en nuestro escritorio, dibujar en ellas nuestros pixeles y manejar el input del usuario. Vamos, que se encarga de toda la parte visual de nuestro juego.
+
+Ojo, porque hay dos versiones de la MinilibX que puedes utilizar, la [versión original de 42Paris](https://github.com/42Paris/minilibx-linux), o la [versión mejorada de Codam](https://github.com/codam-coding-college/MLX42) (el 42 de Países Bajos). Para este proyeco **recomiendo encarecidamente utilizar la de Codam**. En la librería de Codam es mucho más facil uitliar .png a la hora de construir texxturas y assets, mientras que en la versión estandar tendrás o que dibujar los assets a mano en .xpm, o convertirlos de .png a .xpm con herramientas externas. Además, creo que la documentación de Codam está ejor y es más accesible.
+
+**Nota importante**: todo este repositorio y está basado en la librería de Codam, aunque dejo instrucciones para instalar ambas por si la quieres probar.
 
 1. Lo primero de todo, aunque nosotros vamos a usar la minilibx, esta depende a su vez del sistema de ventanas X original. En concreto depende de `xorg`, `x11` y `zlib`, por lo que tenemos que instalar `xorg`, `libxext-dev` y `zlib1g-dev`.
 
@@ -58,22 +61,39 @@ sudo apt-get update && sudo apt-get install xorg libxext-dev zlib1g-dev libbsd-d
 2. Una vez que tenemos lo necesario, hay que meter la Minilibx dentro de la carpeta de nuestro proyecto (asumiendo de que ya hayas creado tu repo en Git). En lugar de un git clone dentro de nuestro proyecto (lo que nos va a dar conflicto con nuestro propio Git), lo mejor es hacer un [submodulo](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Es decir, una referencia para que Git descargue los archivos del respositorio original en lugar de volver a subir nosotros los archivos a nuestro propio Github.
 
 ```
+# MinilibX 42 París
 git submodule add https://github.com/42Paris/minilibx-linux
+
+# MLX42 Codam
+git submodule add https://github.com/codam-coding-college/MLX42
 ```
-3. Se creará una nueva carpeta, minilibx-linux. Metete dentro y ejecuta *configure* desde la terminal. Este comando, aparte de ejecutar make, comprobará que X11 está instalado en nuestro sistema
+
+3. Se creará una nueva carpeta, minilibx-linux o MLX42 dependiendo de la librería que hayas elegido. Metete dentro y ejecuta `configure` o `cmake` desde la terminal. 
 
 ```
+# MinilibX 42 París
 cd minilibx-linux
 ./configure
+
+# MLX42 Codam
+git clone https://github.com/codam-coding-college/MLX42.git
+cd MLX42
+cmake -B build # build here refers to the outputfolder.
+cmake --build build -j4 # or do make -C build -j4
 ```
-4. Una vez que hemos hecho make, acuerdate de meter los .h de la Minilibx en el .h de tu proyecto.
+
+4. Una vez que hemos hecho make, acuerdate de meter los .h en el header de tu proyecto.
 
 ```c
+// MinilibX 42 París
 #include "minilibx-linux/mlx.h"
 #include "minilibx-linux/mlx_int.h"
+
+// MLX Codam
+# include "MLX42/MLX42.h"
 ```
 
-5. Por último, nos falta unir todas las librerías necesarias a la hora de compilar, tanto la Minilibx como X11 y Xexti.
+5. Por último, nos falta unir todas las librerías necesarias a la hora de compilar, tanto la Minilibx (que requiere como X11 y Xexti) como la MLX42.
 
 Vamos a empezar con la Minilibx. Despues de hacer make en nuestra carpeta minilibx-linux, también se crearán dos archivos .a: libmlx.a y libmlx_Linux.a. Los vamos a necesitar para nuestro proyecto, así que a la hora de compilar tenemos que utilizar dos flags:
 
@@ -90,14 +110,16 @@ cc main.c -L minilibx-linux/ -lmlx -lXext -lX11
 Como vamos a tener que usar estas flags por cada objeto, lo mejor es incluir esta regla en el Makefile.
 
 ```
-NAME = so_long
-SRC = main.c
-OBJ = $(SRC:%.c=%.o)
-all: $(NAME)
-
 $(NAME): $(OBJ)
 	cc $(OBJ) -o $(NAME) -L minilibx-linux/ -lmlx -lXext -lX11
 ```
+Para la MLX42, aparte del archivo `libmlx42.a` necesitamos instalar y cargar la librería [`GLWF`](https://www.glfw.org/), basada en OpenGL. Tienes [instrucciones](https://github.com/codam-coding-college/MLX42#download-and-build---mlx42) de como hacerlo en la documentación de Codam. También puedes crear una regla en tu Makefile que aglutine todo cuando montes el programa:
+
+```
+# Compiling libs and flags
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw (puedes añadir más liberías)
+```
+
 
 ### Funciones y usos
 
@@ -516,7 +538,7 @@ int	allocate_map(t_map *map, char *arg)
 
 Con saltos
 
-```C
+```c
 int	allocate_map(t_map *map, char *arg)
 {
 	int		i;
@@ -537,10 +559,7 @@ int	allocate_map(t_map *map, char *arg)
 	close(map->fd);
 	return (SUCCESS);
 }
-
-- Tengo la posición de P, ¿necesito la de E?
-
-- ¿Cómo gestiono el borrado de los coleccionables, pinto encima o elimino el puntero a imagen? ¿Si he hecho copias, como es mi caso?
+```
 
 ## Bibliografía y recursos
 
