@@ -1,48 +1,59 @@
 # so_long
+<!-- vscode-markdown-toc -->
+* [Libería Minilibx](#LiberaMinilibx)
+	* [Qué es y cómo instalarla](#Quesycmoinstalarla)
+	* [Funciones y usos](#Funcionesyusos)
+		* [Gestión de MLX y ventanas](#GestindeMLXyventanas)
+		* [Texturas e imagenes](#Texturaseimagenes)
+* [Bibliografía y recursos](#Bibliografayrecursos)
+	* [Páginas web](#Pginasweb)
+	* [Vídeos](#Vdeos)
 
-- [Introducción]
-- [Nuevos conceptos]
-- [Librería Minilibx](#libería-minilibx)
-	- [Qué es y cómo instalarla](#qué-es-y-cómo-instalarla)
-	- [Funciones y usos](#funciones-y-usos)
-		- [mlx_init](#mlx_init)
-		- [mlx_new_window](#mlx_win)
-		- [mlx_loop](#mlx_loop)
-- [Libería Math]
-- [Desarrollo](#desarrollo)
-	- [Gestión del mapa .ber y parseo](#gestión-del-mapa-ber-y-parseo)
-		- [Gestionar .ber](#gestionar-ber)
-		- [Parseo de recangulo y caracteres](#open-read-parseo-de-caracteres-y-comprobar-rectangulo)
-		- [Parseo de muros]
-		- [Parseo de rutas con Flood Fill]
-	- [Gestion de gráficos](#gestión-de-gráficos)
-		- [Mostar imagen en ventana](#mostrar-imagen-en-ventana)
-		- [Cierre con ESC y cruz roja](#cierre-con-esc-y-cruz)
-		- [Resize de la ventana y minimizar]
-		- [Uso de images de la miniLibx]
-	- [Juego]
-		- [Hacer loop de refresco de cada movimiento o 30 fps]
-		- [Movimiento con WASD]
-		- [Colosion con paredes]
-		- [Mostrar movimientos]
-		- [Recolección de objetos]
-		- [Llegar a la meta]
-- [Dudas y preguntas]
-- [Bibliografía y recursos](#bibliografía-y-recursos)
+<!-- vscode-markdown-toc-config
+	numbering=false
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
 
-## Nuevos conceptos
+## ¡Bienvenido a tu primer videojuego!
 
-- **Event Loop**:
+¡Hola! Este proyecto se llama so_long, y se trata de un primer acercamiento al mundo de los videjuegos a través del lenguaje de programación C. Aquí vas a aprender a manejar una librería externa, dibuhar pixeles en pantalla y como manejar el input del usuario para crear unos controles básicos.
 
-- **Handler Function**
+Una de las partes más díficiles de un videojuego es pensar en el concepto del mismo, las mecanicas y qué experiencia vamos a ofrecer al usuario. Pero como este proyecto trata sobre aprender a programar (y no como conceptualizr un videojuego, para eso te recomiendo que le preguntes a [Mark Brown](https://www.youtube.com/channel/UCqJ-Xo29CKyLTjn6z2XwYAw)), vamos a partir de una idea sencilla y ver cómo la podemos programar en algo que parezca un videojuego.
 
-- **KEYSYM vs KEYCODE**
+Imáginate un mapa 2D sencillito, casi minimalista. Algo así como un boceto de lo que sería el nivel de un videojuego. Piensa en algo básico, como paredes que no puedes atravesar y una salida que alcanzar. 
 
-- **Hooks**:
+// Dibujo 1
 
-## Libería Minilibx
+Vale, esto es un poco soso. ¿Le podemos dar algo de gracia? Vamos a ponerle algo, como objetos que coleccionar  para poder desbloquear la salida. 
 
-### Qué es y cómo instalarla
+// Dibujo 2
+
+Ok, esto ya está algo mejor. Vale, ¿y como representariamos esto con letras y números, para que lo pueda leer un ordenador?
+
+// Caracteres
+
+¡Ok! Esto ya tiene pinta de mapa. Si le echamos imaginación, te puedes incluso imaginar la vista cenital de un Zelda...
+
+// Dibujo zelda
+
+... o incluso un plataformas en 2D, como Celeste.
+
+// Dibujo Celeste
+
+Yo al verlo se me ha venido a la cabeza un mapa de ajedrez, un poco como este 
+
+// Captura
+
+¿No pinta mal, verdad? Hasta le podemos poner un nombre así con gancho... ¿Qué tal algo como King's Pawns?
+
+// Imagen
+
+Pues ahora que ya tenemos una idea, vamos a ver cómo podemos ir de la teoría a la práctica y cómo se puede programar un pequeño videojuego en C.
+
+## <a name='LiberaMinilibx'></a>Libería Minilibx
+
+### <a name='Quesycmoinstalarla'></a>Qué es y cómo instalarla
 
 Una de los puntos clave de este proyecto es aprender a usar librerías externas. En concreto, vamos a manejar una librería llamada [MinilibX](https://github.com/42Paris/minilibx-linux), una versión minimalista del sistema de ventanas [X](https://en.wikipedia.org/wiki/X_Window_System) de Linux.
 
@@ -52,13 +63,13 @@ Ojo, porque hay dos versiones de la MinilibX que puedes utilizar, la [versión o
 
 **Nota importante**: todo este repositorio y está basado en la librería de Codam, aunque dejo instrucciones para instalar ambas por si la quieres probar.
 
-1. Lo primero de todo, aunque nosotros vamos a usar la minilibx, esta depende a su vez del sistema de ventanas X original. En concreto depende de `xorg`, `x11` y `zlib`, por lo que tenemos que instalar `xorg`, `libxext-dev` y `zlib1g-dev`.
+Lo primero de todo, aunque nosotros vamos a usar la minilibx, esta depende a su vez del sistema de ventanas X original. En concreto depende de `xorg`, `x11` y `zlib`, por lo que tenemos que instalar `xorg`, `libxext-dev` y `zlib1g-dev`.
 
 ```
 sudo apt-get update && sudo apt-get install xorg libxext-dev zlib1g-dev libbsd-dev
 ```
 
-2. Una vez que tenemos lo necesario, hay que meter la Minilibx dentro de la carpeta de nuestro proyecto (asumiendo de que ya hayas creado tu repo en Git). En lugar de un git clone dentro de nuestro proyecto (lo que nos va a dar conflicto con nuestro propio Git), lo mejor es hacer un [submodulo](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Es decir, una referencia para que Git descargue los archivos del respositorio original en lugar de volver a subir nosotros los archivos a nuestro propio Github.
+Una vez que tenemos lo necesario, hay que meter la Minilibx dentro de la carpeta de nuestro proyecto (asumiendo de que ya hayas creado tu repo en Git). En lugar de un git clone dentro de nuestro proyecto (lo que nos va a dar conflicto con nuestro propio Git), lo mejor es hacer un [submodulo](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Es decir, una referencia para que Git descargue los archivos del respositorio original en lugar de volver a subir nosotros los archivos a nuestro propio Github.
 
 ```
 # MinilibX 42 París
@@ -68,7 +79,7 @@ git submodule add https://github.com/42Paris/minilibx-linux
 git submodule add https://github.com/codam-coding-college/MLX42
 ```
 
-3. Se creará una nueva carpeta, minilibx-linux o MLX42 dependiendo de la librería que hayas elegido. Metete dentro y ejecuta `configure` o `cmake` desde la terminal. 
+Se creará una nueva carpeta, minilibx-linux o MLX42 dependiendo de la librería que hayas elegido. Metete dentro y ejecuta `configure` o `cmake` desde la terminal. 
 
 ```
 # MinilibX 42 París
@@ -82,7 +93,7 @@ cmake -B build # build here refers to the outputfolder.
 cmake --build build -j4 # or do make -C build -j4
 ```
 
-4. Una vez que hemos hecho make, acuerdate de meter los .h en el header de tu proyecto.
+Una vez que hemos hecho make, acuerdate de meter los .h en el header de tu proyecto.
 
 ```c
 // MinilibX 42 París
@@ -93,7 +104,7 @@ cmake --build build -j4 # or do make -C build -j4
 # include "MLX42/MLX42.h"
 ```
 
-5. Por último, nos falta unir todas las librerías necesarias a la hora de compilar, tanto la Minilibx (que requiere como X11 y Xexti) como la MLX42.
+Por último, nos falta unir todas las librerías necesarias a la hora de compilar, tanto la Minilibx (que requiere como X11 y Xexti) como la MLX42.
 
 Vamos a empezar con la Minilibx. Despues de hacer make en nuestra carpeta minilibx-linux, también se crearán dos archivos .a: libmlx.a y libmlx_Linux.a. Los vamos a necesitar para nuestro proyecto, así que a la hora de compilar tenemos que utilizar dos flags:
 
@@ -120,454 +131,205 @@ Para la MLX42, aparte del archivo `libmlx42.a` necesitamos instalar y cargar la 
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw (puedes añadir más liberías)
 ```
 
+### <a name='Funcionesyusos'></a>Funciones y usos
 
-### Funciones y usos
+A partir de aquí me voy a centrar en el uso básico de la MLX42 de Codam, aunque lo mejor es que te leas la [documentación](https://github.com/codam-coding-college/MLX42/wiki) y el [MLX42.h](https://github.com/codam-coding-college/MLX42/blob/master/include/MLX42/MLX42.h) para conocer todas las funciones que hay. La documentación de la Minillibx de 42 París es muy pobre, asi que si tienes alguna duda te recomiendo que leas esta [guía](https://harm-smits.github.io/42docs/libs/minilibx).
 
-#### mlx_init
+#### <a name='GestindeMLXyventanas'></a>Gestión de MLX y ventanas
 
-Inicia la estructura que va a alojar el resto de información sobre nuestro sistema de ventanas. Es el puntero principal que dicta el resto de elementos de nuestro sistema, como las diferentes ventanas que vamos a usar.
+La mayoría de la MLX42 gira alrededor de la estructura `mlx`, que alberga toda la información relevante de nuestra ventana. Así que sería buena idea que te fueras familiarizando con ella.
 
 ```c
-	void	*mlx;
-
-	mlx = mlx_init();
+ * Main MLX handle, carries important data in regards to the program.
+ * @param window The window itself.
+ * @param context Abstracted opengl data.
+ * @param width The width of the window.
+ * @param height The height of the window.
+ * @param delta_time The time difference between the previous frame 
+ * and the current frame.
+ */
+typedef struct mlx
+{
+	void*		window;
+	void*		context;
+	int32_t		width;
+	int32_t		height;
+	double		delta_time;
+}
 ```
 
-#### mlx_win
+##### <a name='mlx_init'></a>mlx_init
 
-Dentro de nuestra estructura mlx, crea una nueva ventana. Recibe como parametros el puntero de nuestra estructura mlx, el tamaño de la ventana y su nombre.
+Inicia una estructura que va a alojar el resto de información sobre nuestro sistema de ventanas. Es el puntero principal que dicta el resto de elementos de nuestro sistema, como las diferentes ventanas que vamos a usar.
 
 ```c
-	void	*mlx;
-	void	*mlx_win;
+	mlx_t	*mlx;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx = mlx_init(1920,1080, "Your new window", false);
 ```
 
-### mlx_loop
+##### <a name='mlx_terminate'></a>mlx_terminate
 
-Es el encargado de mantener nuestro proceso en abierto. Sin el, la ventana automáticamente se cerraría y se acabaría el proceso, como en un código normal.
-
+Una vez que has inicializado una estructura `mlx`, tienes que liberarla con `mlx_terminate` para evitar leaks.
 
 ```c
-	void	*mlx;
-	void	*mlx_win;
+	mlx_t	*mlx;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx = mlx_init(1920,1080, "Your new window", false);
+	mlx_terminate(mlx);
+```
+
+##### <a name='mlx_close_window'></a>mlx_close_window
+
+También puede que quieras cerrar la ventana que has creado, pero no destruir la estructura (por ejemplo, para cerrar la ventana al pulsar ESC). Para ello puedes usar `mlx_close_window`.
+
+```c
+	mlx_t	*mlx;
+
+	mlx = mlx_init(1920,1080, "Your new window", false);
+	mlx_close_window(mlx);
+	mlx_terminate(mlx);
+```
+
+##### <a name='mlx_set_setting'></a>mlx_set_setting
+
+Antes de iniciar una estructura `mlx`, puedes elegir que características va a tener la ventana, como por ejemplo que se inicie a pantalla completa o que no se muestre directamente. Útil para modificar el comportamiento de la ventana.
+
+```c
+typedef enum mlx_settings
+{
+	MLX_STRETCH_IMAGE = 0,	// Should images resize with the window as it's being resized or not. Default: false
+	MLX_FULLSCREEN,			// Should the window be in Fullscreen, note it will fullscreen at the given resolution. Default: false
+	MLX_MAXIMIZED,			// Start the window in a maximized state, overwrites the fullscreen state if this is true. Default: false
+	MLX_DECORATED,			// Have the window be decorated with a window bar. Default: true
+	MLX_HEADLESS,			// Run in headless mode, no window is created. (NOTE: Still requires some form of window manager such as xvfb)
+	MLX_SETTINGS_MAX,		// Setting count.
+}	mlx_settings_t;
+
+mlx_t	*mlx;
+
+mlx_set_setting(MLX_HEADLESS, true);
+mlx = mlx_init(1920,1080, "Your new window", false);
+mlx_terminate(mlx);
+```
+
+##### <a name='mlx_get_window'></a>mlx_get_window
+
+También es útil obtener información sobre que monitor está usando el usuario, sobre todo para saber qué resolución está utilizando. Para ello podemos usar `mlx_get_window`, que alamcena esta información en dos punteros a `int32_t`.
+
+```c
+mlx_t	*mlx;
+int32_t	width;
+int32_t	height;
+
+mlx = mlx_init(1920,1080, "Your new window", false);
+mlx_get_monitor_size(0, &width, &height);
+mlx_terminate(mlx);
+```
+
+##### <a name='LoopsyHooks'></a>Loops y Hooks
+Si ya has probado a inicializar una ventana, puede que te estés preguntando por qué no se te muestra nada en pantalla al ejecutar tu programa. Si no le indicas a tu programa que se detengba a mostrar esta pantalla, la ejecución va a continuar su camino y el programa terminará de ejecutarse antes de mostrar nada al usuario.
+
+Para ello, tienes que hacer uso de los `loops`, funciones que mantienen el programa abierto y evitan que se acabe la ejecución antes de tiempo.
+
+##### <a name='mlx_loop'></a>mlx_loop
+
+Es el encargado de mantener nuestro proceso en abierto. Sin el la ventana automáticamente se cerraría y se acabaría el proceso.
+
+```c
+	mlx_t	*mlx;
+
+	mlx = mlx_init(1920,1080, "Your new window", false);
 	mlx_loop(mlx);
+	mlx_terminate(mlx);
 ```
 
-
-## Desarrollo
-
-### Gestión del mapa .ber y parseo
-
-Para que sea más fácil gestionar el mapa, debemos de convertir nuestro fichero .ber en un array de strings (parecido al primer rush de la piscina) para luego poder manejarlo mejor y poder hacer todas las comprobaciones necesarias, como el flood fill. Por ahora vamos a usar esta estructura.
+##### <a name='mlx_hook'></a>mlx_hook
+Si llamamos a una función `loop`, nuestro programa se va a quedar ejecutando hasta el infinito a no ser que le digamos que pare. Para ello están las funciones `hook`, funciones que recogen el input del usuario y realizan una determinada acción. Por ejemplo, cerrar una ventana si pulsamos ESC a través de la función `mlx_key_hook`.
 
 ```c
-typedef struct s_map
+void	close_mlx(mlx_key_data_t keydata, void *param)
 {
-	char	**map_array;
-	int		fd;
-	int		y_size;
-	int		x_size;
-}	t_map;
-```
+	mlx_t	*mlx;
 
-#### Gestionar ber
-
-Lo primero de todo, tenemos que ver es que el argv[1] es un fichero .ber.
-
-```C
-int	check_ber(char *arg, t_map *map)
-{
-	if (!arg)
-		return (FILE_ERROR);
-	if (end_ber(arg))
-		return (FILE_ERROR);
+	mlx = (mlx_t *)param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(mlx);
 }
 
-int	end_ber(char *arg)
+int	main(void)
 {
-	size_t	arg_len;
+	mlx_t	*mlx;
 
-	arg_len = ft_strlen(arg);
-	if (arg_len < 4)
-		return (FILE_ERROR);
-	return (ft_strncmp (arg + arg_len - 4, ".ber", 4));
-}
-```
-#### Open, read, parseo de caracteres y comprobar rectangulo
-
-Una vez que tenemos un fichero .ber, tenemos que ver si lo podemos abrir.
-
-```c
-int	check_ber(char *arg, t_map *map)
-{
-	if (!arg)
-		return (FILE_ERROR);
-	if (end_ber(arg))
-		return (FILE_ERROR);
-	map->fd = open(arg, O_RDONLY);
-	if (map->fd < 0)
-		return (FILE_ERROR);
+	mlx = mlx_init(1920,1080, "Your new window", false);
+	mlx_key_hook(mlx, close_mlx, mlx);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	return (0);
 }
 ```
 
-Ahora viene uno de los primeros parseos importantes: ver si se puede abrir el fichero, si estamos ante un rectangulo y si tenemos los caracteres adecuados.
+Hay diferentes tipos de `hooks` dependiendo de la acción que quieres hacer, así que lo mejor es que repases el manual y decidas que es lo que más se ajusta a lo que quieras hacer.
 
-Lo primero, vamos a ver si se puede abrir el fichero
+#### <a name='Texturaseimagenes'></a>Texturas e imagenes
+
+Ahora que ya sabemos iniciar una ventana y que se muestre por pantalla, toca llenarla de vida. Aquí es donde la MLX42 de Codam brilla, ya que podemos cargar .png directamente a nuestra ventana de forma simple.
+
+##### <a name='mlx_load_png'></a>mlx_load_png
+El primer paso es cargar nuestro .png en el programa. Para ello podemos usar la función `mlx_load_png`, que toma como argumento la ruta de la imagen que queremos cargar y la convierte a una textura que podemos utilizar bajo la estructura `mlx_texture`. También debemos eliminar esa textura con `mlx_delete_texture`.
+
 
 ```c
-int	check_ber(char *arg, t_map *map)
-{
+	mlx_texture_t	*b_king_t;
 
-	if (!arg)
-		return (FILE_ERROR);
-	if (end_ber(arg))
-		return (FILE_ERROR);
-	if (find_size(map, arg) != SUCCESS || map->y_size < 3 || map->x_size < 3) // Un rectangulo debe de ser como minimo de 3 para moverse entre los muros
-		return (FILE_ERROR);
-}
-int	find_size(t_map *map, char *arg)
-{
-	char	*temp;
-	int		flag;
-
-	map->fd = open(arg, O_RDONLY);
-	if (map->fd < 0)
-		return (FILE_ERROR);
-	close(map->fd); // Acuerdate de cerrar el fd
-	return (SUCCESS);
-}
+	b_king_t = mlx_load_png("./textures/pieces/b_king_32.png");
+	mlx_delete_texture(b_king_t);
 ```
 
-Para el rectangulo, tenemos que primero hayar las dimensiones de nuestro mapa. Empezemos con y, que es el número de filas que tiene el mapa. Para ello, basta con saber el número de llamadas que se hacen a GNL hasta acabar la lectura.
+##### <a name='mlx_texture_to_image'></a>mlx_texture_to_image
+Una vez que tengamos nuestra textura, tenemos que cargarla en una imagen bajo la estructura `mlx_image_t` a través de la función `mlx_texture_to_image`, que recibe como argumento nuestra instancia de `xml` y la textura que queremos cargar. También tendremos que liberar esa imagen con `mlx_delete_image`.
 
 ```c
-int	find_size(t_map *map, char *arg)
-{
-	char	*temp;
-	int		ddflag;
+	mlx_t	*mlx;
+	mlx_texture_t	*b_king_t;
+	mlx_image_t		*b_king_i;
 
-	map->fd = open(arg, O_RDONLY);
-	if (map->fd < 0)
-		return (FILE_ERROR);
-	flag = SUCCESS;
-	temp = get_next_line(map->fd);
-	if (temp == NULL)
-		flag = FILE_ERROR;
-	map->y_size = 1;
-	while (temp)
-	{
-		if (temp)
-			free (temp);
-		temp = get_next_line(map->fd);
-		map->y_size++;
-	}
-	close(map->fd);
-	map->y_size--; // Restamos uno por que la ultima lectura de GNL nos va a dar NULL
-	return (flag);
-}
+	mlx = mlx_init(1920,1080, "Your new window", false);
+	b_king_t = mlx_load_png("./textures/pieces/b_king_32.png");
+	b_king_i = mlx_texture_to_image(mlx, texture);
+	mlx_delete_image(b_king_i);
+	mlx_delete_texture(b_king_t);
+	mlx_terminate(mlx);
 ```
 
-Aprovechando que estamos averiguando el tamaño en y línea a línea, podemos aprovechar para leer cada una de estas líneas, ver su tamaño y si contiene algún caracter que sea inadecuado.
+##### <a name='mlx_image_to_window'></a>mlx_image_to_window
+Por último, sólo queda mostar la imagen por pantalla. Para eollo utiliza `mlx_image_to_window`, que toma como argumento la instancia de `mlx`, la imagen que quieras renderizar, y las coordenadas dentro de la ventana.
 
 ```c
-int	find_size(t_map *map, char *arg)
-{
-	char	*temp;
-	int		flag;
+	mlx_t	*mlx;
+	mlx_texture_t	*b_king_t;
+	mlx_image_t		*b_king_i;
 
-	map->fd = open(arg, O_RDONLY);
-	if (map->fd < 0)
-		return (FILE_ERROR);
-	flag = SUCCESS;
-	temp = get_next_line(map->fd);
-	if (temp == NULL)
-		flag = FILE_ERROR;
-	map->y_size = 1;
-	map->x_size = len_set_char(temp);
-	while (temp)
-	{
-		if (temp)
-			free (temp);
-		temp = get_next_line(map->fd);
-		if (temp != NULL && (len_set_char(temp) != map->x_size))
-			flag = FILE_ERROR;
-		map->y_size++;
-	}
-	close(map->fd);
-	map->y_size--;
-	return (flag);
-}
-
-int	len_set_char(char	*line)
-{
-	ssize_t	string_size;
-	char	*set;
-
-	if (!line)
-		return (0);
-	string_size = 0;
-	set = "10PCE";
-	while (*line && *line != '\n')
-	{
-		if (!ft_strchr(set, *line))
-			return (FILE_ERROR);
-		string_size++;
-		line++;
-	}
-	return (string_size);
-}
+	mlx = mlx_init(1920,1080, "Your new window", false);
+	b_king_t = mlx_load_png("./textures/pieces/b_king_32.png");
+	b_king_i = mlx_texture_to_image(mlx, texture);
+	mlx_image_to_window(mlx, b_king_i, 0, 0);
+	mlx_loop(mlx);
+	mlx_delete_image(b_king_i);
+	mlx_delete_texture(b_king_t);
+	mlx_terminate(mlx);
 ```
 
-#### Parseo de muros
+Con esto termina el repaso a las funciones básicas de la MLX42 de Codam. Te animo a que revises la documentación y te empapes de conocimiento. Hay muchas cosas interesantes, y a nada que cojas práctica ya vas a ir cogiendo una idea de lo que puedes hacer con esta librería.
 
-Ahora toca comprobar que nuestro mapa está rodeado de muros. Para ello, podemos hacer un parseo parecido al del primero rush de la piscina y manejar un array.
+## <a name='Bibliografayrecursos'></a>Bibliografía y recursos
 
-Así que antes vamos a alojar todo el mapa dentro de un array char**
-
-```C
-int	allocate_map(t_map *map, char *arg)
-{
-	int		i;
-	char	*temp; // Temporal para alojar el gnl
-
-	map->fd = open(arg, O_RDONLY);
-	if (map->fd < 0)
-		return (FILE_ERROR);
-	map->map_array = malloc ((map->y_size + 1) * sizeof(char *)); // Alojamos el numero total de filas (acuerdate del +1 para el NULL)
-	if (!map->map_array)
-		return (MALLOC_ERROR);
-	i = -1;
-	while (i++ < map->y_size) // Inicializamos la estructura por si la tenemos que liberar el algun momento, ya que no podemos usar calloc
-		map->map_array[i] = NULL;
-	i = -1;
-	while (i++ < map->y_size - 1)
-	{
-		temp = get_next_line(map->fd);
-		map->map_array[i] = ft_substr(temp, 0, map->x_size); // Substring para quitar el \n del final y tener nuestro array limpio
-		free (temp);
-		temp = NULL;
-		if (!map->map_array[i]) // Si en algun momento falla el alojo de memoria, estate preparado para limpiar y cerrar todo
-			return (free_map_array(map, MALLOC_ERROR));
-	}
-	close(map->fd);
-	return (SUCCESS);
-}
-
-int	free_map_array(t_map *map, int flag)
-{
-	int	i;
-
-	if (!map || !map->map_array)
-		return (flag);
-	i = 0;
-	while (map->map_array[i]) // Como el resto del array esta inicializado en NULL, no nos debemos preocupar
-	{
-		free(map->map_array[i]);
-		i++;
-	}
-	free(map->map_array);
-	map->map_array = NULL;
-	if (map->fd) // Acuerdate de cerrar el fd incluso si falla algo
-		close(map->fd);
-	return (flag);
-}
-```
-
-Ahora que ya tenemos nuestro mapa alojado en un array, podemos navegarlo con facilidad para comprobrar las paredes
-
-```c
-int	bad_walls(t_map *map)
-{
-	int	i;
-
-	i = -1;
-	while (map->map_array[0][++i]) // Navegamos la primera fila hasta llegar a NULL
-		if (map->map_array[0][i] != '1')
-			return (FILE_ERROR);
-	i = -1;
-	while (map->map_array[map->y_size - 1][++i]) // Navegamos la ultima fila hasta llegar a NULL
-		if (map->map_array[map->y_size - 1][i] != '1')
-			return (FILE_ERROR);
-	i = -1;
-	while (++i < map->y_size) // En cuanto columnas, no podemos recorrerlas en base a NULL, por lo que dependemos de y_size
-		if (map->map_array[i][0] != '1')
-			return (FILE_ERROR);
-
-	i = -1;
-	while (++i < map->y_size) // zlo mismo por aqui
-		if (map->map_array[i][map->x_size - 1] != '1')
-			return (FILE_ERROR);
-	return (SUCCESS);
-}
-```
-
-#### Parseo de rutas con Flood Fill
-
-### Gestión de gráficos
-
-Antes que nada, por el amor de dios, créate una estructura que contenga todos los punteros de tu entorno mlx. Es decir, el puntero principal del init y tu ventana.
-
-```c
-typedef struct s_mlx_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-}	t_mlx_data;
-```
-
-#### Mostrar imagen en ventana
-
-1. Primero, inicia la estructura con mlx_init
-
-```c
-	mlx.mlx_ptr = mlx_init();
-```
-
-2. Abre una ventana con mlx_new_window
-
-```c
-	mlx.mlx_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 1080, "Hello world!");
-```
-
-3. Mantenla viva con mlx_loop
-
-```c
-	mlx.mlx_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1920, 1080, "Hello world!");
-	mlx_loop(mlx.mlx_ptr);
-```
-
-#### Cierre con ESC y cruz
-
-Necesitamos cerrar la ventana de dos maneras, con nuestro teclado y con nuestro ratón.
-
-* Teclado: necesitamos crear un hook de teclado con mlx_key_hook. Este hook va a coger todos nuestros inputs, por lo que solo necesitamos una función que libere toda la memoria si se pulsa la tecla escape (recuerda, usa keysym en lugar de keycodes, los primeros son universales y el segundo depende del OS del usuario).
-
-```c
-	mlx_key_hook(mlx.win_ptr, handle_input, &mlx);
-
-
-	int	handle_input(int keysym, t_mlx_data *mlx)
-	{
-		static int	i;
-
-		if (keysym == XK_Escape)
-		{
-			mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-			mlx_destroy_display(mlx->mlx_ptr);
-			free(mlx->mlx_ptr);
-			exit(1);
-		}
-		return (0);
-	}
-```
-
-* Ratón: Necesitamos un hook que esté atento a cuando se pulsa la x. Para ello usamos el evento DestroyNotify (si no tienes macro, es la flag 17).
-
-```c
-	mlx_hook(mlx.win_ptr, DestroyNotify, 0, close_window, &mlx);
-
-	int	close_window(t_mlx_data *mlx)
-	{
-		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-		mlx_destroy_display(mlx->mlx_ptr);
-		free(mlx->mlx_ptr);
-		exit(1);
-	}
-```
-## Dudas y preguntas
-
-- ¿Hay que crear un buffer que muestre toda la imagen de una vez, en lugar de generarla línea a línea?
-
-- ¿Cuentan los mapas cuadrados?
-
-Si es así, hay que cambiar esta funcion
-
-```c
-int	check_ber(char *arg, t_map *map)
-{
-
-	if (!arg)
-		return (FILE_ERROR);
-	if (bad_ber(arg))
-		return (FILE_ERROR);
-	if (bad_size(map, arg)|| map->y < 4 || map->x < 4 || map->y == map->x)
-		return (FILE_ERROR);
-	ft_printf("X is %d\nY is %d\n", map->x_size, map->y_size);
-	//if (allocate_map(map) != SUCCESS)
-		//return (FILE_ERROR);
-	return (SUCCESS);
-}
-
-- Al alojar el mapa, ¿debe de incorporar los saltos de línea o evitarlos?
-
-Evitando saltos
-
-```c
-int	allocate_map(t_map *map, char *arg)
-{
-	int		i;
-	char	*temp;
-
-	map->fd = open(arg, O_RDONLY);
-	if (map->fd < 0)
-		return (FILE_ERROR);
-	map->map_array = malloc ((map->y_size + 1) * sizeof(char *));
-	if (!map->map_array)
-		return (MALLOC_ERROR);
-	i = -1;
-	while (i++ < map->y_size)
-	{
-		temp = get_next_line(map->fd);
-		map->map_array[i] = ft_substr(temp, 0, map->x_size);
-		free (temp);
-		if (!map->map_array)
-			return (free_map_array(map, MALLOC_ERROR));
-	}
-	close(map->fd);
-	return (SUCCESS);
-}
-```
-
-Con saltos
-
-```c
-int	allocate_map(t_map *map, char *arg)
-{
-	int		i;
-
-	map->fd = open(arg, O_RDONLY);
-	if (map->fd < 0)
-		return (FILE_ERROR);
-	map->map_array = malloc ((map->y_size + 1) * sizeof(char *));
-	if (!map->map_array)
-		return (MALLOC_ERROR);
-	i = -1;
-	while (i++ < map->y_size)
-	{
-		map->map_array[i] = get_next_line(map->fd);
-		if (!map->map_array)
-			return (free_map_array(map, MALLOC_ERROR));
-	}
-	close(map->fd);
-	return (SUCCESS);
-}
-```
-
-## Bibliografía y recursos
-
-### Páginas web
+### <a name='Pginasweb'></a>Páginas web
 
 - [MiniLibx | 42 Docs](https://harm-smits.github.io/42docs/libs/minilibx)
+- [MLX42 | Welcome to the MLX42 documentation](https://github.com/codam-coding-college/MLX42/wiki)
 
-### Vídeos
+### <a name='Vdeos'></a>Vídeos
 
 - [Beginner's Guide To The Desktop](https://www.youtube.com/playlist?list=PLTXMX1FE5Hj7JmR73CQDXkNq8OVn9_Z6F)
 - [Draw a Pollock painting with the minilibX](https://www.youtube.com/watch?v=9eAPbNUQD1Y)
