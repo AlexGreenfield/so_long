@@ -50,6 +50,8 @@ Yo al verlo se me ha venido a la cabeza un mapa de ajedrez, y gracias a los asse
 
 ¿No pinta mal, verdad? Hasta le podemos poner un nombre así con gancho... ¿Qué tal algo como King's Pawns? ¿Y si le hacemos una banda sonora así sencilla?
 
+https://github.com/user-attachments/assets/a6b7a7d9-6f13-4c87-b816-1b32c84f99f4
+
 Pues ahora que ya tenemos una idea de lo que va este proyecto, vamos a ver cómo podemos ir de la teoría a la práctica y cómo se puede programar un pequeño videojuego en C.
 
 ## <a name='LiberaMinilibx'></a>Libería Minilibx
