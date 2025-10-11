@@ -1,5 +1,6 @@
 # so_long
 <!-- vscode-markdown-toc -->
+* [¡Bienvenido a tu primer videojuego!](#Bienvenidoatuprimervideojuego)
 * [Libería Minilibx](#LiberaMinilibx)
 	* [Qué es y cómo instalarla](#Quesycmoinstalarla)
 	* [Funciones y usos](#Funcionesyusos)
@@ -15,7 +16,9 @@
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
-## ¡Bienvenido a tu primer videojuego!
+## <a name='Bienvenidoatuprimervideojuego'></a>¡Bienvenido a tu primer videojuego!
+
+![King's Pawn](images/kings_pawn.gif)
 
 ¡Hola! Este proyecto se llama so_long, y se trata de un primer acercamiento al mundo de los videjuegos a través del lenguaje de programación C. Aquí vas a aprender a manejar una librería externa, dibuhar pixeles en pantalla y como manejar el input del usuario para crear unos controles básicos.
 
@@ -23,33 +26,31 @@ Una de las partes más díficiles de un videojuego es pensar en el concepto del 
 
 Imáginate un mapa 2D sencillito, casi minimalista. Algo así como un boceto de lo que sería el nivel de un videojuego. Piensa en algo básico, como paredes que no puedes atravesar y una salida que alcanzar. 
 
-// Dibujo 1
+![Map1](images/map1.jpg)
 
-Vale, esto es un poco soso. ¿Le podemos dar algo de gracia? Vamos a ponerle algo, como objetos que coleccionar  para poder desbloquear la salida. 
+Vale, esto es un poco soso. ¿Le podemos dar algo de gracia? Vamos a ponerle algo, como objetos que coleccionar para poder desbloquear la salida, por ejemplo.
 
-// Dibujo 2
+![Map2](images/map2.jpg)
 
 Ok, esto ya está algo mejor. Vale, ¿y como representariamos esto con letras y números, para que lo pueda leer un ordenador?
 
-// Caracteres
+![Map with Characters](images/mapcharacters.jpg)
 
-¡Ok! Esto ya tiene pinta de mapa. Si le echamos imaginación, te puedes incluso imaginar la vista cenital de un Zelda...
+¡Ok! Esto ya tiene pinta de mapa. Si le echamos imaginación, te puedes incluso imaginar la vista cenital de un Zelda/Tunic, como este proyecto de [Emmatosorus](https://github.com/Emmatosorus/so_long)...
 
-// Dibujo zelda
+![Emamatosorus so_long](images/emmatosorus.jpg)
 
-... o incluso un plataformas en 2D, como Celeste.
+... o incluso un plataformas en 2D, como está adaptación del Celeste de 8Pico de (Alienxbe)[https://github.com/Alienxbe/SoLong#].
 
-// Dibujo Celeste
+![Alienxbe so_long](images/alienxbe.jpg)
 
-Yo al verlo se me ha venido a la cabeza un mapa de ajedrez, un poco como este 
+Yo al verlo se me ha venido a la cabeza un mapa de ajedrez, y gracias a los assets Pixel Chess de (DANI MACCARI)[https://dani-maccari.itch.io/pixel-chess] le he podido dar forma a algo como esto.
 
-// Captura
+![King's Pawn](images/kings_pawn.gif)
 
-¿No pinta mal, verdad? Hasta le podemos poner un nombre así con gancho... ¿Qué tal algo como King's Pawns?
+¿No pinta mal, verdad? Hasta le podemos poner un nombre así con gancho... ¿Qué tal algo como King's Pawns? ¿Y si le hacemos una banda sonora así sencilla?
 
-// Imagen
-
-Pues ahora que ya tenemos una idea, vamos a ver cómo podemos ir de la teoría a la práctica y cómo se puede programar un pequeño videojuego en C.
+Pues ahora que ya tenemos una idea de lo que va este proyecto, vamos a ver cómo podemos ir de la teoría a la práctica y cómo se puede programar un pequeño videojuego en C.
 
 ## <a name='LiberaMinilibx'></a>Libería Minilibx
 
