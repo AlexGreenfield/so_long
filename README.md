@@ -1,6 +1,7 @@
 # so_long
 <!-- vscode-markdown-toc -->
 * [¡Bienvenido a tu primer videojuego!](#Bienvenidoatuprimervideojuego)
+* [Uso e instrucciones](#Usoeinstrucciones)
 * [Libería Minilibx](#LiberaMinilibx)
 	* [Qué es y cómo instalarla](#Quesycmoinstalarla)
 	* [Funciones y usos](#Funcionesyusos)
@@ -53,6 +54,27 @@ Yo al verlo se me ha venido a la cabeza un mapa de ajedrez, y gracias a los asse
 https://github.com/user-attachments/assets/a6b7a7d9-6f13-4c87-b816-1b32c84f99f4
 
 Pues ahora que ya tenemos una idea de lo que va este proyecto, vamos a ver cómo podemos ir de la teoría a la práctica y cómo se puede programar un pequeño videojuego en C.
+
+## <a name='Usoeinstrucciones'></a>Uso e instrucciones
+
+Si quieres probar esta maravilla técnica, es tan sencillo como llamar al Makefile y cargar un mapa valido. El movimiento es con WASD.
+
+```
+git clone git@github.com:AlexGreenfield/so_long.git
+
+cd so_long
+```
+
+Para una implementación básica
+
+```
+make && ./so_long <ruta del mapa>
+```
+Para una implementación más avanzada (animaciones, enemigos...)
+
+```
+make bonus && ./so_long_bonus <ruta del mapa>
+```
 
 ## <a name='LiberaMinilibx'></a>Libería Minilibx
 
