@@ -41,11 +41,11 @@ Ok, esto ya está algo mejor. Vale, ¿y como representariamos esto con letras y 
 
 ![Emamatosorus so_long](images/emmatosorus.jpg)
 
-... o incluso un plataformas en 2D, como está adaptación del Celeste de 8Pico de (Alienxbe)[https://github.com/Alienxbe/SoLong#].
+... o incluso un plataformas en 2D, como está adaptación del Celeste de 8Pico de [Alienxbe](https://github.com/Alienxbe/SoLong#).
 
 ![Alienxbe so_long](images/alienxbe.jpg)
 
-Yo al verlo se me ha venido a la cabeza un mapa de ajedrez, y gracias a los assets Pixel Chess de (DANI MACCARI)[https://dani-maccari.itch.io/pixel-chess] le he podido dar forma a algo como esto.
+Yo al verlo se me ha venido a la cabeza un mapa de ajedrez, y gracias a los assets Pixel Chess de [DANI MACCARI](https://dani-maccari.itch.io/pixel-chess) le he podido dar forma a algo como esto.
 
 ![King's Pawn](images/kings_pawn.gif)
 
