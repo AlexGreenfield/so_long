@@ -21,11 +21,11 @@
 
 ![King's Pawn](images/kings_pawn.gif)
 
-¡Hola! Este proyecto se llama so_long, y se trata de un primer acercamiento al mundo de los videjuegos a través del lenguaje de programación C. Aquí vas a aprender a manejar una librería externa, dibuhar pixeles en pantalla y como manejar el input del usuario para crear unos controles básicos.
+¡Hola! Este proyecto se llama so_long, y se trata de un primer acercamiento al mundo de los videojuegos a través del lenguaje de programación C. Aquí vas a aprender a manejar una librería externa, dibujar píxeles en pantalla y cómo manejar el input del usuario para crear unos controles básicos.
 
-Una de las partes más díficiles de un videojuego es pensar en el concepto del mismo, las mecanicas y qué experiencia vamos a ofrecer al usuario. Pero como este proyecto trata sobre aprender a programar (y no como conceptualizr un videojuego, para eso te recomiendo que le preguntes a [Mark Brown](https://www.youtube.com/channel/UCqJ-Xo29CKyLTjn6z2XwYAw)), vamos a partir de una idea sencilla y ver cómo la podemos programar en algo que parezca un videojuego.
+Una de las partes más difíciles de un videojuego es pensar en el concepto del mismo, las mecánicas y qué experiencia vamos a ofrecer al usuario. Pero como este proyecto trata sobre aprender a programar (y no como conceptualizr un videojuego, para eso te recomiendo que le preguntes a [Mark Brown](https://www.youtube.com/channel/UCqJ-Xo29CKyLTjn6z2XwYAw)), vamos a partir de una idea sencilla y ver cómo la podemos programar en algo que parezca un videojuego.
 
-Imáginate un mapa 2D sencillito, casi minimalista. Algo así como un boceto de lo que sería el nivel de un videojuego. Piensa en algo básico, como paredes que no puedes atravesar y una salida que alcanzar. 
+Imaginate un mapa 2D sencillito, casi minimalista. Algo así como un boceto de lo que sería el nivel de un videojuego. Piensa en algo básico, como paredes que no puedes atravesar y una salida que alcanzar. 
 
 ![Map1](images/map1.jpg)
 
@@ -33,7 +33,7 @@ Vale, esto es un poco soso. ¿Le podemos dar algo de gracia? Vamos a ponerle alg
 
 ![Map2](images/map2.jpg)
 
-Ok, esto ya está algo mejor. Vale, ¿y como representariamos esto con letras y números, para que lo pueda leer un ordenador?
+Ok, esto ya está algo mejor. Vale, ¿y como representamos esto con letras y números, para que lo pueda leer un ordenador?
 
 ![Map with Characters](images/mapcharacters.jpg)
 
@@ -57,7 +57,7 @@ Pues ahora que ya tenemos una idea de lo que va este proyecto, vamos a ver cómo
 
 ## <a name='Usoeinstrucciones'></a>Uso e instrucciones
 
-Si quieres probar esta maravilla técnica, es tan sencillo como llamar al Makefile y cargar un mapa valido. El movimiento es con WASD.
+Si quieres probar esta maravilla técnica, es tan sencillo como llamar al Makefile y cargar un mapa válido. El movimiento es con WASD.
 
 ```
 git clone git@github.com:AlexGreenfield/so_long.git
@@ -80,11 +80,11 @@ make bonus && ./so_long_bonus <ruta del mapa>
 
 ### <a name='Quesycmoinstalarla'></a>Qué es y cómo instalarla
 
-Una de los puntos clave de este proyecto es aprender a usar librerías externas. En concreto, vamos a manejar una librería llamada [MinilibX](https://github.com/42Paris/minilibx-linux), una versión minimalista del sistema de ventanas [X](https://en.wikipedia.org/wiki/X_Window_System) de Linux.
+Uno de los puntos clave de este proyecto es aprender a usar librerías externas. En concreto, vamos a manejar una librería llamada [MinilibX](https://github.com/42Paris/minilibx-linux), una versión minimalista del sistema de ventanas [X](https://en.wikipedia.org/wiki/X_Window_System) de Linux.
 
 Esta librería es la que nos va a permitir crear nuevas ventanas en nuestro escritorio, dibujar en ellas nuestros pixeles y manejar el input del usuario. Vamos, que se encarga de toda la parte visual de nuestro juego.
 
-Ojo, porque hay dos versiones de la MinilibX que puedes utilizar, la [versión original de 42Paris](https://github.com/42Paris/minilibx-linux), o la [versión mejorada de Codam](https://github.com/codam-coding-college/MLX42) (el 42 de Países Bajos). Para este proyeco **recomiendo encarecidamente utilizar la de Codam**. En la librería de Codam es mucho más facil uitliar .png a la hora de construir texxturas y assets, mientras que en la versión estandar tendrás o que dibujar los assets a mano en .xpm, o convertirlos de .png a .xpm con herramientas externas. Además, creo que la documentación de Codam está ejor y es más accesible.
+Ojo, porque hay dos versiones de la MinilibX que puedes utilizar, la [versión original de 42Paris](https://github.com/42Paris/minilibx-linux), o la [versión mejorada de Codam](https://github.com/codam-coding-college/MLX42) (el 42 de Países Bajos). Para este proyecto **recomiendo encarecidamente utilizar la de Codam**. En la librería de Codam es mucho más fácil utilizar archivos .png a la hora de construir texturas y assets, mientras que en la versión estándar tendrás o que dibujar los assets a mano en .xpm, o convertirlos de .png a .xpm con herramientas externas. Además, creo que la documentación de Codam está ,ejor y es más accesible.
 
 **Nota importante**: todo este repositorio y está basado en la librería de Codam, aunque dejo instrucciones para instalar ambas por si la quieres probar.
 
@@ -94,7 +94,7 @@ Lo primero de todo, aunque nosotros vamos a usar la minilibx, esta depende a su 
 sudo apt-get update && sudo apt-get install xorg libxext-dev zlib1g-dev libbsd-dev
 ```
 
-Una vez que tenemos lo necesario, hay que meter la Minilibx dentro de la carpeta de nuestro proyecto (asumiendo de que ya hayas creado tu repo en Git). En lugar de un git clone dentro de nuestro proyecto (lo que nos va a dar conflicto con nuestro propio Git), lo mejor es hacer un [submodulo](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Es decir, una referencia para que Git descargue los archivos del respositorio original en lugar de volver a subir nosotros los archivos a nuestro propio Github.
+Una vez que tenemos lo necesario, hay que meter la Minilibx dentro de la carpeta de nuestro proyecto (asumiendo de que ya hayas creado tu repo en Git). En lugar de un git clone dentro de nuestro proyecto (lo que nos va a dar conflicto con nuestro propio Git), lo mejor es hacer un [submodulo](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Es decir, una referencia para que Git descargue los archivos del repositorio original en lugar de volver a subir nosotros los archivos a nuestro propio Github.
 
 ```
 # MinilibX 42 París
@@ -118,7 +118,7 @@ cmake -B build # build here refers to the outputfolder.
 cmake --build build -j4 # or do make -C build -j4
 ```
 
-Una vez que hemos hecho make, acuerdate de meter los .h en el header de tu proyecto.
+Una vez que hemos hecho make, acuérdate de meter los .h en el header de tu proyecto.
 
 ```c
 // MinilibX 42 París
@@ -131,13 +131,13 @@ Una vez que hemos hecho make, acuerdate de meter los .h en el header de tu proye
 
 Por último, nos falta unir todas las librerías necesarias a la hora de compilar, tanto la Minilibx (que requiere como X11 y Xexti) como la MLX42.
 
-Vamos a empezar con la Minilibx. Despues de hacer make en nuestra carpeta minilibx-linux, también se crearán dos archivos .a: libmlx.a y libmlx_Linux.a. Los vamos a necesitar para nuestro proyecto, así que a la hora de compilar tenemos que utilizar dos flags:
+Vamos a empezar con la Minilibx. Después de hacer make en nuestra carpeta minilibx-linux, también se crearán dos archivos .a: libmlx.a y libmlx_Linux.a. Los vamos a necesitar para nuestro proyecto, así que a la hora de compilar tenemos que utilizar dos flags:
 
 * **-L minilibx-linux/**: La flag -L le dice al compilador que busque dentro de la carpeta minilibx-linux.
 
 * **-lmlx**: Una vez dentro de la carpeta minilibx-linux, le decimos que busque la libería libmlx.a (-lmlx).
 
-Ahora que ya le hemos dicho al sistema donde tiene que buscar el .a de la Minilibx, nos queda señalarle que busque X11 y Xext. Al ser liberías instaladas en el propio sistema, basta con usar `-lXext` y `-lX11` para que las busque en nuestros binarios. El código se quedaría así.
+Ahora que ya le hemos dicho al sistema donde tiene que buscar el .a de la Minilibx, nos queda señalar que busque X11 y Xext. Al ser liberías instaladas en el propio sistema, basta con usar `-lXext` y `-lX11` para que las busque en nuestros binarios. El código se quedaría así.
 
 ```
 cc main.c -L minilibx-linux/ -lmlx -lXext -lX11
@@ -158,7 +158,7 @@ LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw (puedes añadir más liberías)
 
 ### <a name='Funcionesyusos'></a>Funciones y usos
 
-A partir de aquí me voy a centrar en el uso básico de la MLX42 de Codam, aunque lo mejor es que te leas la [documentación](https://github.com/codam-coding-college/MLX42/wiki) y el [MLX42.h](https://github.com/codam-coding-college/MLX42/blob/master/include/MLX42/MLX42.h) para conocer todas las funciones que hay. La documentación de la Minillibx de 42 París es muy pobre, asi que si tienes alguna duda te recomiendo que leas esta [guía](https://harm-smits.github.io/42docs/libs/minilibx).
+A partir de aquí me voy a centrar en el uso básico de la MLX42 de Codam, aunque lo mejor es que te leas la [documentación](https://github.com/codam-coding-college/MLX42/wiki) y el [MLX42.h](https://github.com/codam-coding-college/MLX42/blob/master/include/MLX42/MLX42.h) para conocer todas las funciones que hay. La documentación de la Minillibx de 42 París es muy pobre, así que si tienes alguna duda te recomiendo que leas esta [guía](https://harm-smits.github.io/42docs/libs/minilibx).
 
 #### <a name='GestindeMLXyventanas'></a>Gestión de MLX y ventanas
 
@@ -240,7 +240,7 @@ mlx_terminate(mlx);
 
 ##### <a name='mlx_get_window'></a>mlx_get_window
 
-También es útil obtener información sobre que monitor está usando el usuario, sobre todo para saber qué resolución está utilizando. Para ello podemos usar `mlx_get_window`, que alamcena esta información en dos punteros a `int32_t`.
+También es útil obtener información sobre qué monitor está usando el usuario, sobre todo para saber qué resolución está utilizando. Para ello podemos usar `mlx_get_window`, que almacena esta información en dos punteros a `int32_t`.
 
 ```c
 mlx_t	*mlx;
@@ -253,13 +253,13 @@ mlx_terminate(mlx);
 ```
 
 ##### <a name='LoopsyHooks'></a>Loops y Hooks
-Si ya has probado a inicializar una ventana, puede que te estés preguntando por qué no se te muestra nada en pantalla al ejecutar tu programa. Si no le indicas a tu programa que se detengba a mostrar esta pantalla, la ejecución va a continuar su camino y el programa terminará de ejecutarse antes de mostrar nada al usuario.
+Si ya has probado a inicializar una ventana, puede que te estés preguntando por qué no se te muestra nada en pantalla al ejecutar tu programa. Si no le indicas a tu programa que se detenga a mostrar esta pantalla, la ejecución va a continuar su camino y el programa terminará de ejecutarse antes de mostrar nada al usuario.
 
 Para ello, tienes que hacer uso de los `loops`, funciones que mantienen el programa abierto y evitan que se acabe la ejecución antes de tiempo.
 
 ##### <a name='mlx_loop'></a>mlx_loop
 
-Es el encargado de mantener nuestro proceso en abierto. Sin el la ventana automáticamente se cerraría y se acabaría el proceso.
+Es el encargado de mantener nuestro proceso en abierto. Sin él la ventana automáticamente se cerraría y se acabaría el proceso.
 
 ```c
 	mlx_t	*mlx;
@@ -328,7 +328,7 @@ Una vez que tengamos nuestra textura, tenemos que cargarla en una imagen bajo la
 ```
 
 ##### <a name='mlx_image_to_window'></a>mlx_image_to_window
-Por último, sólo queda mostar la imagen por pantalla. Para eollo utiliza `mlx_image_to_window`, que toma como argumento la instancia de `mlx`, la imagen que quieras renderizar, y las coordenadas dentro de la ventana.
+Por último, sólo queda mostrar la imagen por pantalla. Para ello utiliza `mlx_image_to_window`, que toma como argumento la instancia de `mlx`, la imagen que quieras renderizar, y las coordenadas dentro de la ventana.
 
 ```c
 	mlx_t	*mlx;
