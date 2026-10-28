@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 14:06:12 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/26 19:44:53 by acastrov         ###   ########.fr       */
+/*   Updated: 2026/10/28 21:27:22 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	main(int argc, char **argv)
 			return (MALLOC_ERROR);
 		if (check_ber(argv[1], map) != SUCCESS)
 			return (free_main_map(map, FILE_ERROR));
-		if (get_window_size(map) != SUCCESS)
-			return (free_main_map(map, FILE_ERROR));
 		if (init_so_long(map) != SUCCESS)
 			return (free_main_map(map, X_ERROR));
 		return (free_main_map(map, SUCCESS));
@@ -42,13 +40,15 @@ int	init_so_long(t_map *map)
 	mlx_t			*mlx;
 	t_textures		*textures;
 	t_global		*global;
-	int				scale;
 
-	scale = map->int_scale;
-	mlx = mlx_init(((WIDTH * scale) * map->x_size),
-			((HEIGHT * scale) * map->y_size), "King's Pawn", false);
+	textures = NULL;
+	mlx = mlx_init(1, 1, "King's Pawn", false);
 	if (!mlx)
 		return (X_ERROR);
+	if (get_window_size(map) != SUCCESS)
+		return (end_game(map, mlx, textures, X_ERROR));
+	 mlx_set_window_size(mlx, WIDTH * map->int_scale * map->x_size,
+		HEIGHT * map->int_scale * map->y_size);
 	textures = malloc (sizeof(t_textures));
 	if (!textures)
 		return (MALLOC_ERROR);
@@ -61,7 +61,6 @@ int	init_so_long(t_map *map)
 	mlx_loop_hook(mlx, idle, global);
 	mlx_loop(mlx);
 	free(global);
-	global = NULL;
 	return (end_game(map, mlx, textures, SUCCESS));
 }
 

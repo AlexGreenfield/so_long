@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_ft.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:13:52 by alejandro         #+#    #+#             */
-/*   Updated: 2025/02/25 17:15:09 by acastrov         ###   ########.fr       */
+/*   Updated: 2026/10/28 21:26:43 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,27 +73,21 @@ void	disable_object(t_global *global)
 
 int	get_window_size(t_map *map)
 {
-	mlx_t	*temp;
 	int32_t	width;
 	int32_t	height;
 	int		width_factor;
 	int		height_factor;
 
-	mlx_set_setting(MLX_HEADLESS, true);
-	temp = mlx_init(1, 1, "", false);
-	if (!temp)
-	{
-		mlx_terminate(temp);
-		return (X_ERROR);
-	}
 	mlx_get_monitor_size(0, &width, &height);
-	mlx_terminate(temp);
-	mlx_set_setting(MLX_HEADLESS, false);
+	if (width <= 0 || height <= 0)
+		return(X_ERROR);
 	width_factor = width / (map->x_size * WIDTH);
 	height_factor = height / (map->y_size * HEIGHT);
 	if (width_factor < height_factor)
 		map->int_scale = width_factor;
 	else
 		map->int_scale = height_factor;
+	if (map->int_scale < 1)
+		map->int_scale = 1;
 	return (SUCCESS);
 }
