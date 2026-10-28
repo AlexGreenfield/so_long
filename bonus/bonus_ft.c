@@ -6,7 +6,7 @@
 /*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:13:52 by alejandro         #+#    #+#             */
-/*   Updated: 2026/10/28 21:26:43 by alejandro        ###   ########.fr       */
+/*   Updated: 2026/10/28 23:42:53 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	idle(void *param)
 	global->textures->b_king_i->instances[0].y = global->map->p_y * HEIGHT * s;
 	global->textures->b_kingb_i->instances[0].x = global->map->p_x * WIDTH * s;
 	global->textures->b_kingb_i->instances[0].y = global->map->p_y * HEIGHT * s;
-	if (frames % (30 * 2) < 30)
+	if (frames < 30)
 	{
 		global->textures->b_king_i->enabled = true;
 		global->textures->b_kingb_i->enabled = false;
@@ -37,7 +37,7 @@ void	idle(void *param)
 		global->textures->b_kingb_i->enabled = true;
 		global->textures->w_king_i->enabled = true;
 	}
-	frames++;
+	frames = (frames + 1) % 60;
 }
 
 int	my_abs(int n)
